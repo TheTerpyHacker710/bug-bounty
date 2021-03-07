@@ -11,7 +11,7 @@
         <span class="px-4 py-4 border-4">
                 <h2 class="text-center py-2">Reports</h2>
                 <ul>
-                    <li v-for="report in reports">ID: {{report.id}}</li>
+                    <li :key="report.id" v-for="report in activeReports">ID: {{report.id}}</li>
                 </ul>
         </span>
     </div>
@@ -22,7 +22,7 @@
 
 export default {
     name: 'Active Jobs',
-    props: ['reports'],
+    props: ['activeReports'],
 }
 
 </script>

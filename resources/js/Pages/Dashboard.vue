@@ -15,7 +15,7 @@
                     </span>
 
                     <span class="bg-white col-span-4 shadow">
-                        <active-jobs :reports="reports"/>
+                        <active-jobs :activeReports="activeReports"/>
                     </span>
 
                     <span class="bg-white col-span-2 shadow">
@@ -37,7 +37,7 @@
     import Awards from '@/Pages/Dashboard/Awards'
 
     export default {
-        props: ['reports'],
+        props: ['activeReports'],
 
         components: {
             AppLayout,
