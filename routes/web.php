@@ -3,8 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\activeReports;
+use App\Models\User;
 use Inertia\Inertia;
-
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -27,15 +27,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    
-    $activeReports = activeReports::all();
-
-    return Inertia::render('Dashboard', [
-        'activeReports' => $activeReports,
-   ]);
-   
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard')
+    ->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/report', function () {
     return Inertia::render('Reporting/Report');

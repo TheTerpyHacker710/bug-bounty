@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Programs extends Model
 {
     use HasFactory;
+
+    public function activeReports() {
+        return $this->hasMany(activeReports::class);
+    }
 }

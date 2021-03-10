@@ -13,4 +13,12 @@ class activeReports extends Model
         $this->completed_at = now();
         $this->save();
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function program() {
+        return $this->belongsTo(Programs::class);
+    }
 }
