@@ -17,13 +17,13 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                               <jet-nav-link :href="route('report')" :active="route().current('report')">
+                               <jet-nav-link :href="route('Report')" :active="route().current('Report')">
                                     Report
                                 </jet-nav-link>
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('verify')" :active="route().current('verify')">
+                                <jet-nav-link :href="route('Verify')" :active="route().current('Verify')">
                                     Verify
                                 </jet-nav-link>
                             </div>
