@@ -25,6 +25,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
+        'org_id',
         'email',
         'password',
     ];
@@ -57,6 +59,12 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+    ];
+    
+    protected $attributes = [
+        'isVendor' => '0',
+        'isAdmin' => '0',
+
     ];
 
     public function activeReports() {
