@@ -98,6 +98,13 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'qcod/laravel-gamify' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'QCod\\Gamify\\GamifyServiceProvider',
+    ),
+  ),
   'tightenco/ziggy' => 
   array (
     'providers' => 
