@@ -2,11 +2,14 @@
 
 namespace App\Actions\Fortify;
 
+use Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Models\UserSkill;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
