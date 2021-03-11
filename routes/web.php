@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\VerificationsController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\activeReports;
 use App\Models\User;
@@ -27,17 +30,33 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/Dashboard', [DashboardController::class, 'index'])
+Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/Report', function () {
-    return Inertia::render('Reporting/Report');
-})->name('Report');
+Route::middleware(['auth:sanctum', 'verified'])->get(
+    '/report', [ReportsController::class, 'create']
+)->name('Report');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/Verify', function () {
-    return Inertia::render('Reporting/Verify');
-})->name('Verify');
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/report', [ReportsController::class, 'store']
+)->name('storeReport');
+
+Route::middleware(['auth:sanctum', 'verified'])->get(
+    '/verify', [VerificationsController::class, 'create']
+)->name('Verify');
+
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/verify', [VerificationsController::class, 'store']
+);
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/Report', function () {
+//    return Inertia::render('Reporting/Report');
+//})->name('Report');
+//
+//Route::middleware(['auth:sanctum', 'verified'])->get('/Verify', function () {
+//    return Inertia::render('Reporting/Verify');
+//})->name('Verify');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
     if(Auth::user()->isVendor == 1){
