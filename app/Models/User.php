@@ -25,6 +25,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
+        'org_id',
         'email',
         'password',
     ];
@@ -58,12 +60,30 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    
+    protected $attributes = [
+        'isVendor' => '0',
+        'isAdmin' => '0',
+
+    ];
 
     public function activeReports() {
         return $this->hasMany(activeReports::class);
     }
 
     public function reports() {
-        return $this->hasMany(Reports::class);
+        return $this->hasMany(Report::class, "creator_id");
+    }
+
+    public function verificationAssignments() {
+        return $this->hasMany(VerificationAssignment::class, 'assignee_id');
+    }
+
+    public function verificationSubmissions() {
+        return $this->hasManyThrough(VerificationSubmission::class, VerificationAssignment::class, 'assignee_id');
+    }
+
+    public function cachedMetrics() {
+        return $this->hasMany(UserMetricCacheEntry::class);
     }
 }
