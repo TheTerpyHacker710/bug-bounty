@@ -16,7 +16,7 @@ class SkillController extends Controller
 
         $tags = Tag::all();
         
-        return Inertia::render('TagTest', [
+        return Inertia::render('SkillTag', [
             'tags' => $tags
         ]);              
     }
