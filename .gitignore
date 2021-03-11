@@ -11,7 +11,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+<<<<<<< HEAD
 .idea
 /public/js/app.js
 /storage/logs
 supervisord.*
+=======
+node_modules
+>>>>>>> master
