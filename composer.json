@@ -17,6 +17,7 @@
         "laravel/jetstream": "^2.2",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "qcod/laravel-gamify": "^1.0",
         "laravel/ui": "^3.2",
         "tightenco/ziggy": "^1.0"
     },
