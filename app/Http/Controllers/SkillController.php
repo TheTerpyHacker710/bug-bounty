@@ -14,7 +14,7 @@ class SkillController extends Controller
     //Function for the controller to access
     public function show(){
 
-        $tags = Tag::all();
+        $tags = SkillTag::all();
         
         return Inertia::render('SkillTag', [
             'tags' => $tags
@@ -33,7 +33,7 @@ class SkillController extends Controller
                 $params = false;        //exit while
             }else{
 
-                $tag = UserTag::firstOrCreate([                     //firstorCreate checks database first to see if theres already a matching entry
+                $tag = UserSkill::firstOrCreate([                     //firstorCreate checks database first to see if theres already a matching entry
                     'tag_id' => $request[$i]['tag_id'],
                     'user_id' => Auth::user()->id,
                     ]);
