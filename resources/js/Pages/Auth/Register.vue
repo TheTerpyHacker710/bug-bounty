@@ -39,7 +39,7 @@
             </h2>
             <div class="mt-4">
                 <jet-label for="skills" value="Your Skills" />
-                <select id="skills" v-on:change="addTag"class="block mt-1 mb-10 w-full">
+                <select id="skills" v-on:change="addTag" class="block mt-1 mb-10 w-full">
                     <option disabled value="">Please select some of your skills</option>
                     <option v-for="tag in $attrs.skilltags" :value="tag.tag_id">@{{tag.tag_name}}</option>
                 </select>
