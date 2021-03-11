@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use App\Models\Tag;
-use App\Models\UserTag;
+use App\Models\SkillTag;
+use App\Models\UserSkill;
 use Inertia\Inertia;
 
 class SkillController extends Controller
