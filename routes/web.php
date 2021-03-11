@@ -27,17 +27,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
+Route::get('/Dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
     ->middleware('auth');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/report', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/Report', function () {
     return Inertia::render('Reporting/Report');
-})->name('report');
+})->name('Report');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/verify', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/Verify', function () {
     return Inertia::render('Reporting/Verify');
-})->name('verify');
+})->name('Verify');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
     if(Auth::user()->isVendor == 1){
