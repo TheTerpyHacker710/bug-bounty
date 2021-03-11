@@ -15,17 +15,15 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Reporter User ID')->constrained('users');
-            $table->foreignId('program_id')->constrained('programs');
+            $table->integer('program_id');
+            $table->json('procedure');
+            $table->integer('severity');
+            $table->integer('complexity');
+            $table->integer('reliability');
+            $table->foreignId('creator_id')->constrained('users');
+            $table->enum('status', array('pending', 'verified', 'rejected'))->default('pending');
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
-            $table->text('Description');
-            $table->integer('Severity Score');
-            $table->integer('Number of Steps');
-            $table->integer('Reliability');
-            $table->string('Verification Approved')->nullable();
-            $table->string('Status')->default('Pending...');
-            $table->timestamp('Actioned At')->nullable();
-            $table->integer('NumOfCancelledVerifications')->nullable();
         });
     }
 
