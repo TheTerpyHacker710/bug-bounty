@@ -43,6 +43,7 @@
     39 => 'App\\Providers\\RouteServiceProvider',
     40 => 'App\\Providers\\FortifyServiceProvider',
     41 => 'App\\Providers\\JetstreamServiceProvider',
+    42 => 'App\\Providers\\BugBountyServiceProvider',
   ),
   'eager' => 
   array (
@@ -74,6 +75,7 @@
     25 => 'App\\Providers\\RouteServiceProvider',
     26 => 'App\\Providers\\FortifyServiceProvider',
     27 => 'App\\Providers\\JetstreamServiceProvider',
+    28 => 'App\\Providers\\BugBountyServiceProvider',
   ),
   'deferred' => 
   array (
@@ -193,8 +195,8 @@
     'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
-    'sail.install-command' => 'Laravel\\Sail\\SailServiceProvider',
-    'sail.publish-command' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
