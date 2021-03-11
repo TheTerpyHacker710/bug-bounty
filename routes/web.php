@@ -38,3 +38,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/Report', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/Verify', function () {
     return Inertia::render('Reporting/Verify');
 })->name('Verify');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
+    if(Auth::user()->isVendor == 1){
+        return Inertia::render('Vendor');
+    }else{
+        return abort(403);
+    }
+})->name('vendor');
+
+Route::get('/registertags', ['App\Http\Controllers\SkillController', 'show']);
+Route::post('/addtags', ['App\Http\Controllers\SkillController', 'store']);

@@ -62,6 +62,7 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+    'firstlogin' => RouteServiceProvider::FIRSTLOGIN,
 
     /*
     |--------------------------------------------------------------------------
