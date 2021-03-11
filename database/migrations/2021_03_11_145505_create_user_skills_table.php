@@ -4,19 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTagTable extends Migration
+class CreateUserSkillsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-
     public function up()
     {
-        Schema::create('skill_tag', function (Blueprint $table){
-            $table->id('tag_id')->unique();
-            $table->string('tag_name');
+        Schema::create('user_skills', function (Blueprint $table) {
+            $table->id('user_id');
+            $table->string('tag_id');
         });
     }
 
@@ -27,6 +26,6 @@ class AddTagTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user_skills');
     }
 }
