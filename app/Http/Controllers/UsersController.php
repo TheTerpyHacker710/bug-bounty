@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
         $users = User::all();
 
-        return Inertia::render('Users/Index', [
+        return Inertia::render('Admin/Users/Index', [
             'users' => $users,
     ]);
     }
@@ -31,7 +31,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create');
+        return Inertia::render('Admin/Users/Create');
     }
 
     /**
@@ -76,7 +76,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return Inertia::render('Users/Edit', [
+        return Inertia::render('Admin/Users/Edit', [
            'user' => $user,
         ]);
     }
