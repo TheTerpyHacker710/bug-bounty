@@ -10,12 +10,15 @@
 
         <span class="px-4 py-4 border-4">
                 <h2 class="text-center py-2">Active Reports</h2>
-                <ul>
+                <ul v-if="activeReports.length > 0">
                     <div :key="report.program.id" v-for="report in activeReports" class="py-2">
                         <active-report :report="report"/>
                     </div>
                 </ul>
-                    
+
+                <ul v-else>
+                    <li class="text-center py-4 italic font-thin">No Active Reports</li>
+                </ul>
         </span>
     </div>
     
