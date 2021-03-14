@@ -58,8 +58,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
     }
 })->name('vendor');
 
-Route::get('/registertags', ['App\Http\Controllers\SkillController', 'show']);
-Route::post('/addtags', ['App\Http\Controllers\SkillController', 'store']);
+Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', function () {
     return Inertia::render('Admin/Dashboard');
