@@ -4,10 +4,15 @@
 namespace App\Services\Metrics;
 
 
+use App\Events\VerificationBatchCompleted;
 use App\Models\Report;
 
 class HitRate extends UserMetric
 {
+    protected $getUserMethods = [
+        VerificationBatchCompleted::class => 'getVerificationBatchCompletedUsers',
+    ];
+
     protected function compute($users)
     {
         $result = array();
@@ -19,5 +24,9 @@ class HitRate extends UserMetric
             $result[$user] = $hitRate;
         }
         return $result;
+    }
+
+    protected function getVerificationBatchCompletedUsers(VerificationBatchCompleted $event): array {
+        return [$event->verificationBatch->report->creator_id];
     }
 }

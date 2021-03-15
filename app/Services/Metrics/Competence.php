@@ -4,11 +4,15 @@
 namespace App\Services\Metrics;
 
 
+use App\Events\VerificationBatchCompleted;
 use App\Models\Report;
 use App\Models\VerificationBatch;
 
 class Competence extends UserMetric
 {
+    protected $getUserMethods = [
+        VerificationBatchCompleted::class => 'getVerificationBatchCompletedUsers',
+    ];
 
     protected function compute($users)
     {
@@ -20,5 +24,9 @@ class Competence extends UserMetric
             })->get()->pluck('voted_complexity')->average();
         }
         return $result;
+    }
+
+    protected function getVerificationBatchCompletedUsers(VerificationBatchCompleted $event): array {
+        return [$event->verificationBatch->report->creator_id];
     }
 }

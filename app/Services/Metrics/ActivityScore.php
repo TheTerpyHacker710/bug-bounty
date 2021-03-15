@@ -4,11 +4,18 @@
 namespace App\Services\Metrics;
 
 
+use App\Events\ReportSubmitted;
+use App\Events\VerificationBatchCompleted;
+use App\Events\VerificationSubmitted;
 use App\Models\Report;
 use App\Models\VerificationSubmission;
 
 class ActivityScore extends UserMetric
 {
+    protected $getUserMethods = [
+        ReportSubmitted::class => 'getReportSubmittedUsers',
+        VerificationSubmitted::class => 'getVerificationSubmittedUsers',
+    ];
 
     protected function compute($users)
     {
@@ -23,5 +30,13 @@ class ActivityScore extends UserMetric
             $result[$user] = $activityScore;
         }
         return $result;
+    }
+
+    protected function getReportSubmittedUsers(ReportSubmitted $event): array {
+        return [$event->report->creator_id];
+    }
+
+    protected function getVerificationSubmittedUsers(VerificationSubmitted $event): array {
+        return [$event->verificationSubmission->verificationAssignment->assignee_id];
     }
 }
