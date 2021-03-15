@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Laravel\Jetstream\Jetstream;
 use App\Models\SkillTag;
 use App\Models\UserSkill;
 use Inertia\Inertia;
@@ -11,40 +13,36 @@ use Inertia\Inertia;
 class SkillController extends Controller
 {
 
-    //Function for the controller to access
     public function show(){
-
-        $tags = SkillTag::all();
-        
-        return Inertia::render('SkillTag', [
-            'tags' => $tags
-        ]);              
+    
     }
 
     
     public function store(Request $request){
 
-        $params = true; //for while loop - if we still have something in the request.
-        
-        $i = 0; //to iterate through request - some issues with for loops count
-        while($params){
+    }
 
-            if($request[$i] == NULL){   //if request is empty
-                $params = false;        //exit while
-            }else{
+    public function update(Request $request){
 
-                $tag = UserSkill::firstOrCreate([                     //firstorCreate checks database first to see if theres already a matching entry
-                    'tag_id' => $request[$i]['tag_id'],
-                    'user_id' => Auth::user()->id,
-                    ]);
-            
-                $i++;
-            }
-                           
+        $input= $request->toArray();
+        $id = Auth::user()->id;
+
+        UserSkill::where('user_id', $id)->delete();
+
+        for($i = 0; $i < count($input['new_tags']); $i++){
+
+        Validator::make($input['new_tags'][$i], [
+            'tag_id' => ['required', 'int', 'max:20']
+        ])->validate();
+
+        $tag = UserSkill::firstOrCreate([                     
+                'tag_id' => $input['new_tags'][$i]['tag_id'],
+                'user_id' => $id,
+                ]);
+
         }
 
-        return Inertia::render('Dashboard');
-
+        return Inertia::render('user/profile');
     }
     
 }

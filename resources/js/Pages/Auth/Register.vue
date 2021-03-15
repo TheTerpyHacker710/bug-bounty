@@ -39,16 +39,15 @@
             </h2>
             <div class="mt-4">
                 <jet-label for="skills" value="Your Skills" />
-                <select id="skills" v-on:change="addTag" class="block mt-1 mb-10 w-full">
-                    <option disabled value="">Please select some of your skills</option>
-                    <option v-for="tag in $attrs.skilltags" :value="tag.tag_id">@{{tag.tag_name}}</option>
+                <select v-model="currentSelect" @change="addTag(currentSelect)" class="block mt-1 mb-10 w-full">
+                    <option v-for="tag in $attrs.skilltags" :value="tag">{{tag.tag_name}}</option>
                 </select>
             </div>
 
             <div v-for="user_tag in this.form.user_tags" class="border-solid border border-gray-400 max-w-max rounded-md shadow-md mt-3">
                 <div class="ml-2 mr-2">
-                    <div>{{user_tag.tag_name}}</div>
-                    <button @click="removeTag(user_tag)" class="ml-6 inline">x</button>
+                        {{user_tag.tag_name}}
+                        <button @click="removeTag(user_tag)" class="ml-6 inline">x</button>
                 </div>
             </div>
 
@@ -110,18 +109,18 @@
                     password_confirmation: '',
                     user_tags: [],
                     terms: false,
-                })
+                }),
 
+                currentSelect: {},
             }
         },
 
         methods: {
 
-            addTag(tag) {
-
+            addTag(value) {
 
                 if (this.form.user_tags.length < 1) {    //if user hasn't added any tags
-                    this.form.user_tags.push(tag);       //immediately add tag, no issues can happen
+                    this.form.user_tags.push(value);       //immediately add tag, no issues can happen
 
                 } else {
 
@@ -129,7 +128,7 @@
 
                     for (var i = 0; i < this.form.user_tags.length; i++) {       //for each tag currently in the user's added tags
 
-                        if (tag.tag_id == this.form.user_tags[i].tag_id) {   //if a matching tag is here already
+                        if (value.tag_id == this.form.user_tags[i].tag_id) {   //if a matching tag is here already
                             match = true;                                   //match is found
                             return;                                         //return so the state of match is saved
                         } else {
@@ -138,7 +137,7 @@
                     }
 
                     if (!match) {                                           //now all of user_tags checked, if no match
-                        this.form.user_tags.push(tag);                           //then we can safely add tag to user_tags 
+                        this.form.user_tags.push(value);                           //then we can safely add tag to user_tags 
                     }
                 }
 

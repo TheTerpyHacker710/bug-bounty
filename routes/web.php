@@ -58,5 +58,20 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
     }
 })->name('vendor');
 
-Route::get('/registertags', ['App\Http\Controllers\SkillController', 'show']);
-Route::post('/addtags', ['App\Http\Controllers\SkillController', 'store']);
+Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', function () {
+    return Inertia::render('Admin/Dashboard');
+})->name('adminDashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/reports', function () {
+    return Inertia::render('Admin/Reports');
+})->name('Reports');
+
+Route::get('/admin/users', 'App\Http\Controllers\UsersController@index')->name('users.index');
+Route::get('/admin/users/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
+Route::post('/admin/users', 'App\Http\Controllers\UsersController@store')->name('users.store');
+
+Route::get('/admin/users/{user}/edit', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
+Route::patch('/admin/users/{user}', 'App\Http\Controllers\UsersController@update')->name('users.update');
+Route::delete('/admin/users/{user}', 'App\Http\Controllers\UsersController@destroy')->name('users.destroy');
