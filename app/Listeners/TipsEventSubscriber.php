@@ -6,7 +6,7 @@ use App\Services\Tips\Tip;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class TipEventSubscriber implements ShouldQueue
+class TipsEventSubscriber implements ShouldQueue
 {
     private $tips;
 
