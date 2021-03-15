@@ -12,6 +12,7 @@
 
         <span class="px-4 py-4 border-4">
                 <h2 class="text-center">Activity</h2>
+                <apexchart :width="chart.width" :height="chart.height" :type="chart.type" :options="chart.options" :series="chart.series"></apexchart>
         </span>
     
     </div>
@@ -19,8 +20,9 @@
 </template>
 
 <script>
-
 export default {
+    props: ['chart'],
+
     data() {
         return {
             

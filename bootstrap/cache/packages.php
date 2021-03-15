@@ -1,4 +1,22 @@
 <?php return array (
+  'arielmejiadev/larapex-charts' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LarapexChart' => 'ArielMejiaDev\\LarapexCharts\\Facades\\LarapexChart',
+    ),
+  ),
+  'consoletvs/charts' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'ConsoleTVs\\Charts\\ChartsServiceProvider',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 

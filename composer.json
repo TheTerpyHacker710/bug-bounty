@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "arielmejiadev/larapex-charts": "^2.1",
+        "consoletvs/charts": "^7.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,8 +19,8 @@
         "laravel/jetstream": "^2.2",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "qcod/laravel-gamify": "^1.0",
         "laravel/ui": "^3.2",
+        "qcod/laravel-gamify": "^1.0",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
