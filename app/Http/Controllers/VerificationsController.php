@@ -31,8 +31,13 @@ class VerificationsController extends Controller
             ->orderBy('created_at')
             ->get();
 
+        $selectedAssignment = (int)(request()->validate([
+            'assignment' => 'integer'
+        ])['assignment']);
+
         return Inertia::render('Verify', [
             "assignments" => $assignments,
+            "selectedAssignment" => $selectedAssignment,
         ]);
     }
 
