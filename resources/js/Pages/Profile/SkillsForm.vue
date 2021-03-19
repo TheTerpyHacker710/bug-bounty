@@ -12,6 +12,7 @@
             <div class="mt-4 col-span-4">
                 <jet-label for="skills" value="Your Skills" />
                 <select v-model="currentSelect" @change="addTag(currentSelect)" class="block mt-1 mb-10 w-full">
+                    <option :value="undefined" disabled stlye="display:none">Please Select</option>
                     <option v-for="tag in this.$props.skilltags" :value="tag">{{tag.tag_name}}</option>
                 </select>
             </div>
@@ -93,6 +94,7 @@
 
                         if (tag.tag_id == this.form.new_tags[i].tag_id) {   //if a matching tag is here already
                             match = true;                                   //match is found
+                            this.currentSelect = undefined;
                             return;                                         //return so the state of match is saved
                         } else {
                             //Do nothing, want to check all of user_tags
@@ -104,7 +106,7 @@
                     }
                 }
 
-                currentSelect = {};
+                this.currentSelect = undefined;
             },
 
 
