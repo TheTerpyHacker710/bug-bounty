@@ -6,6 +6,15 @@
     <div class="grid grid-cols-2 gap-4 px-1 py-1 h-auto">
         <span class="px-4 py-4 border-4 ">
                 <h2 class="text-center py-2">Reports to Verify</h2>
+                <ul v-if="activeVerifications.length > 0">
+                    <div v-for="verification in activeVerifications" :key="verification.id" class="py-2">
+                        <active-verifications :verification="verification" />
+                    </div>
+                </ul>
+                
+                <ul v-else>
+                    <li class="text-center py-4 italic font-thin">No Active Verifications</li>
+                </ul>
         </span>
 
         <span class="px-4 py-4 border-4">
@@ -27,12 +36,14 @@
 <script>
 
 import ActiveReport from './ActiveReport.vue'
+import ActiveVerifications from './ActiveVerifications.vue'
 
 export default {
-    name: 'Active Jobs',
-    props: ['activeReports'],
+    props: ['activeReports', 'activeVerifications'],
+
     components: {
-        ActiveReport
+        ActiveReport,
+        ActiveVerifications
     },
 }
 
