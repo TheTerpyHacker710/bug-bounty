@@ -12,4 +12,8 @@ class Programs extends Model
     public function activeReports() {
         return $this->hasMany(activeReports::class);
     }
+
+    public function reports() {
+        return $this->hasMany(Report::class);
+    }
 }

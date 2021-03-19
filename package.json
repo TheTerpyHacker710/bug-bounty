@@ -34,6 +34,7 @@
         "dompurify": "^2.2.6",
         "marked": "^2.0.1",
         "vue-apexcharts": "^1.6.0",
+        "vue-mq": "^1.0.1",
         "vue3-apexcharts": "^1.2.1"
     }
 }

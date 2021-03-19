@@ -9,6 +9,7 @@ use App\Models\activeReports;
 use App\Models\Programs;
 use App\Models\Report;
 use App\Models\User;
+use App\Models\VerificationAssignment;
 use Inertia\Inertia;
 Use Auth;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
@@ -20,9 +21,16 @@ class DashboardController extends Controller
     public function index() {
         $reportCount = [];
         $reportArr = [];
+        $monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        $count = 0;
 
         $activeReports = Auth::user()->activeReports->load('program');
 
+        $activeVerifications = VerificationAssignment::where('assignee_id', Auth::id())
+        ->with(['verificationBatch:id,report_id', 'verificationBatch.report:id,procedure,program_id', 'verificationBatch.report.program:id,Title,Excerpt']) 
+        ->orderBy('created_at')
+        ->get();
+        
         $submittedReports = DB::table('reports')
         ->select('*')
         ->where('creator_id', '=', Auth::user()->id)
@@ -54,17 +62,21 @@ class DashboardController extends Controller
             ->toVue();
         }
         else {
-            $chart = (new LarapexChart)->lineChart()
-            ->setTitle('Submitted Reports')
-            ->addLine('Reports Submitted', [$reportArr[7], $reportArr[8], $reportArr[9], $reportArr[10], $reportArr[11], $reportArr[12]])
-            ->setXAxis(['Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'])
-            ->setColors(['#ffc63b'])
-            ->toVue();
+            for($i = now()->month; $count < 6; $count++) {
+                $chart = (new LarapexChart)->lineChart()
+                ->setTitle('Submitted Reports')
+                ->addLine('Reports Submitted', [$reportArr[7], $reportArr[8], $reportArr[9], $reportArr[10], $reportArr[11], $reportArr[12]])
+                ->setXAxis([$monthsArr[$i-6], $monthsArr[$i-5], $monthsArr[$i-4], $monthsArr[$i-3], $monthsArr[$i-2], $monthsArr[$i-1]])
+                ->setColors(['#ffc63b'])
+                ->toVue();
+            }
+            
         }
         
 
         return Inertia::render('Dashboard', [
             'activeReports' => $activeReports,
+            'activeVerifications' => $activeVerifications,
             'chart' => $chart
         ]);
     }

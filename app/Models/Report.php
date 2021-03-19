@@ -15,6 +15,10 @@ class Report extends Model
         return $this->belongsTo(User::class, 'creator_id');
     }
 
+    public function program() {
+        return $this->belongsTo(Programs::class, 'program_id');
+    }
+
     public function verificationBatches() {
         return $this->hasMany(VerificationBatch::class);
     }

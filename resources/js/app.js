@@ -3,10 +3,9 @@ require('./bootstrap');
 // Import modules...
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
-import VueApexCharts from 'vue3-apexcharts'
+import VueApexCharts from 'vue3-apexcharts';
 
 const el = document.getElementById('app');
-
 
 createApp({
     render: () =>
