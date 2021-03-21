@@ -31,14 +31,31 @@ class VerificationsController extends Controller
             ->orderBy('created_at')
             ->get();
 
-        $selectedAssignment = (int)(request()->validate([
-            'assignment' => 'integer'
-        ])['assignment']);
+        if(request()->get('assignment')) {
+            $selectedAssignment = (int)(request()->validate([
+                'assignment' => 'integer'
+            ])['assignment']);
 
-        return Inertia::render('Verify', [
-            "assignments" => $assignments,
-            "selectedAssignment" => $selectedAssignment,
-        ]);
+            return Inertia::render('Verify', [
+                "assignments" => $assignments,
+                "selectedAssignment" => $selectedAssignment,
+            ]);
+
+        }
+        else if($assignments->first()) {
+            $selectedAssignment = $assignments->first()->id;
+            return Inertia::render('Verify', [
+                "assignments" => $assignments,
+                "selectedAssignment" => $selectedAssignment,
+            ]);
+        }
+        else {
+            return Inertia::render('Verify', [
+                "assignments" => $assignments,
+            ]);
+        }
+
+        
     }
 
     public function store()
