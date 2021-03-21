@@ -14,7 +14,7 @@
                          <stats :chart="chart"/>
                     </span>
 
-                    <span class="bg-white col-span-4 shadow-xl">
+                    <span class="bg-white col-span-4 shadow-xl h-auto">
                         <active-jobs :activeReports="activeReports" :activeVerifications="activeVerifications"/>
                     </span>
 

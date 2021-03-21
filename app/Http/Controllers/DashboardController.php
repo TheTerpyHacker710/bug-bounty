@@ -87,16 +87,14 @@ class DashboardController extends Controller
             ->toVue();
         }
         else {
-            for($i = now()->month; $count < 6; $count++) {
-                $chart = (new LarapexChart)->lineChart()
-                ->setTitle('User Activity (6 Months)')
-                ->addData('Reports Submitted', [$reportArr[7], $reportArr[8], $reportArr[9], $reportArr[10], $reportArr[11], $reportArr[12]])
-                ->addData('Reports Submitted', [$verificationArr[7], $verificationArr[8], $verificationArr[9], $verificationArr[10], $verificationArr[11], $verificationArr[12]])
-                ->setXAxis([$monthsArr[$i-6], $monthsArr[$i-5], $monthsArr[$i-4], $monthsArr[$i-3], $monthsArr[$i-2], $monthsArr[$i-1]])
-                ->setColors(['#ffc63b', '#ff6384'])
-                ->toVue();
-            }
-            
+            $i = now()->month;
+            $chart = (new LarapexChart)->lineChart()
+            ->setTitle('User Activity (6 Months)')
+            ->addData('Reports Submitted', [$reportArr[$i-5], $reportArr[$i-4], $reportArr[$i-3], $reportArr[$i-2], $reportArr[$i-1], $reportArr[$i]])
+            ->addData('Verifications Submitted', [$verificationArr[$i-5], $verificationArr[$i-4], $verificationArr[$i-3], $verificationArr[$i-2], $verificationArr[$i-1], $verificationArr[$i]])
+            ->setXAxis([$monthsArr[$i-6], $monthsArr[$i-5], $monthsArr[$i-4], $monthsArr[$i-3], $monthsArr[$i-2], $monthsArr[$i-1]])
+            ->setColors(['#ffc63b', '#ff6384'])
+            ->toVue();
         }
         
         return Inertia::render('Dashboard', [
