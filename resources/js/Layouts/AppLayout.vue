@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('Verify')" :active="route().current('Verify')">
+                                <jet-nav-link href="/verify" :active="route().current('Verify')">
                                     Verify
                                 </jet-nav-link>
                             </div>

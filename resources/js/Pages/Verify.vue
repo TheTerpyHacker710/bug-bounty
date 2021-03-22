@@ -110,10 +110,11 @@ export default {
   },
   props: {
     assignments: Array,
+    selectedAssignment: Number,
   },
   data() {
     return {
-      currentReport: this.assignments.length > 0 ? 0 : -1,
+      currentReport: this.findAssignment(this.selectedAssignment),
       form: {
         assignmentId: this.assignments.length > 0 ? this.assignments[0]["id"] : -1,
         verifiable: false,
@@ -144,8 +145,21 @@ export default {
     },
     submitVerification: function () {
       this.$inertia.post('/verify', this.form)
+    },
+    findAssignment: function(id) {
+      if (this.assignments.length)
+      if (id != null) {
+        // find report
+        let index = this.assignments.findIndex(assignment => {
+          return assignment["id"] == this.selectedAssignment
+        });
+        if (index >= 0) {
+          return index;
+        }
+      }
+      return -1;
     }
-  }
+  },
 }
 </script>
 
