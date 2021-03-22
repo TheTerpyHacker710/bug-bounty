@@ -8,29 +8,55 @@
                 <h1></h1>
             </div>
             <div>
-                <jet-label for="name" value="Name" />
+                <jet-label for="name">Name<span class="text-red-600"> *</span></jet-label>
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
             </div>
             <div class="mt-4">
-                <jet-label for="username" value="Username" />
+                <jet-label for="username">Username<span class="text-red-600"> *</span></jet-label>
                 <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required />
             </div>
+
             <div class="mt-4">
-                <jet-label for="org_id" value="Student/Staff ID Number" />
-                <jet-input id="org_id" type="text" class="mt-1 block w-full" v-model="form.org_id" required />
+                <jet-label for="org_id"><span>Organisation ID</span><button @click.native="showOrgModalId" class="ml-5 text-blue-600 border-2 rounded p-0.2 pl-1 pr-1">?</button></jet-label>
+                <jet-input id="org_id" type="text" class="mt-1 block w-full" v-model="form.org_id" />
             </div>
+
             <div class="mt-4">
-                <jet-label for="email" value="Email" />
+                <jet-label for="org_name"><span>Organisation Name</span><button @click.native="showOrgModalName" class="ml-5 text-blue-600 border-2 rounded p-0.2 pl-1 pr-1">?</button></jet-label>
+                <jet-input id="org_name" type="text" class="mt-1 block w-full" v-model="form.org_name" />
+            </div>
+
+            <jet-dialog-modal :show="showOrgIdInfo" @close="showOrgIdInfo = false">
+                <template #content>
+                    If you're registering as a student or university employee, please use your university ID for this field.
+                    Otherwise, leave it blank
+                </template>
+            </jet-dialog-modal>
+
+            <jet-dialog-modal :show="showOrgNameInfo" @close="showOrgNameInfo = false">
+                <template #content>
+                    <ul>
+                        <li class="mb-5">If you're registering as a student, please use the name of your university for this field.</li>
+                        <li class="mb-5">If you're registering as an employee of a non-university organisation, please use the company name.</li>
+                        <li class="mb-5">If you want to become a program vendor, you can request this under profile information.</li>
+                    </ul>
+                </template>
+            </jet-dialog-modal>
+
+            <jet-section-border />
+
+            <div class="mt-4">
+                <jet-label for="email">Email<span class="text-red-600"> *</span></jet-label>
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password">Password<span class="text-red-600"> *</span></jet-label>
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
+                <jet-label for="password_confirmation">Confirm Password<span class="text-red-600"> *</span></jet-label>
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
             <jet-section-border />
@@ -47,8 +73,8 @@
 
             <div v-for="user_tag in this.form.user_tags" class="border-solid border border-gray-400 max-w-max rounded-md shadow-md mt-3">
                 <div class="ml-2 mr-2">
-                        {{user_tag.tag_name}}
-                        <button @click="removeTag(user_tag)" class="ml-6 inline">x</button>
+                    {{user_tag.tag_name}}
+                    <button @click="removeTag(user_tag)" class="ml-6 inline">x</button>
                 </div>
             </div>
 
@@ -86,6 +112,7 @@
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
     import JetSectionBorder from '@/Jetstream/SectionBorder'
+    import JetDialogModal from '@/Jetstream/DialogModal'
 
     export default {
         components: {
@@ -96,7 +123,8 @@
             JetCheckbox,
             JetLabel,
             JetValidationErrors,
-            JetSectionBorder
+            JetSectionBorder,
+            JetDialogModal
         },
 
         data() {
@@ -105,6 +133,7 @@
                     name: '',
                     username: '',
                     org_id: '',
+                    org_name: '',
                     email: '',
                     password: '',
                     password_confirmation: '',
@@ -113,6 +142,9 @@
                 }),
 
                 currentSelect: {},
+
+                showOrgIdInfo: false,
+                showOrgNameInfo: false
             }
         },
 
@@ -155,6 +187,14 @@
                 this.form.post(this.route('register'), {
                     onFinish: () => this.form.reset('password', 'password_confirmation'),
                 })
+            },
+
+            showOrgModalId() {
+                this.showOrgIdInfo = true;
+            },
+
+            showOrgModalName() {
+                this.showOrgNameInfo = true;
             }
         }
     }
