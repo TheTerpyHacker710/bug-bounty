@@ -19,7 +19,7 @@
                     </span>
 
                     <span class="bg-white col-span-2 shadow-xl">
-                        <awards/>
+                        <awards :userInfo="userInfo"/>
                     </span>
 
                 </div>
@@ -39,7 +39,7 @@
     
 
     export default {
-        props: ['activeReports', 'activeVerifications', 'leaderboard', 'chart'],
+        props: ['userInfo', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
         
         
 

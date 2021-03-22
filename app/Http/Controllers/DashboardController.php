@@ -26,6 +26,8 @@ class DashboardController extends Controller
         $monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
         $count = 0;
 
+        $userInfo = Auth::user();
+
         $activeReports = Auth::user()->activeReports->load('program');
 
         $activeVerifications = VerificationAssignment::where('assignee_id', Auth::id())
@@ -51,6 +53,7 @@ class DashboardController extends Controller
             return Carbon::parse($date->created_at)->format('m');
         });
 
+        //ADD FUNCTIONALITY TO COUNT THE AMOUNT OF AWARDS EACH USER HAS
         $leaderboard = User::select('id', 'username', 'reputation')
         ->orderBy('reputation', 'desc')
         ->limit(10)
@@ -101,6 +104,7 @@ class DashboardController extends Controller
         }
         
         return Inertia::render('Dashboard', [
+            'userInfo' => $userInfo,
             'activeReports' => $activeReports,
             'activeVerifications' => $activeVerifications,
             'leaderboard' => $leaderboard,

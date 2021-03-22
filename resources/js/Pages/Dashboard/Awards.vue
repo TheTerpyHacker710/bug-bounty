@@ -9,7 +9,7 @@
         </span>
 
         <span class="px-4 py-4 border-4">
-            <h2 class="text-center">Account Information</h2>
+            <account-information :userInfo="userInfo"/>
         </span>
     </div>
     
@@ -17,8 +17,14 @@
 
 <script>
 
+import AccountInformation from './AccountInformation.vue';
+
 export default {
-    
+    props: ['userInfo'],
+
+    components: {
+        AccountInformation,
+    },
 }
 
 </script>
