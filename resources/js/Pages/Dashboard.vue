@@ -35,13 +35,9 @@
     import Stats from '@/Pages/Dashboard/Stats'
     import ActiveJobs from '@/Pages/Dashboard/ActiveJobs'
     import Awards from '@/Pages/Dashboard/Awards'
-    
-    
 
     export default {
         props: ['userInfo', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
-        
-        
 
         components: {
             AppLayout,
