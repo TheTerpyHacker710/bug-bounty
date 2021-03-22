@@ -15,7 +15,6 @@ use Inertia\Inertia;
 Use Auth;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
-use DB;
 
 class DashboardController extends Controller
 {
@@ -34,7 +33,8 @@ class DashboardController extends Controller
         ->orderBy('created_at')
         ->get();
 
-        $submittedVerifications = VerificationSubmission::whereHas('verificationAssignment', function($query) {
+        $submittedVerifications = VerificationSubmission::select('id')
+        ->whereHas('verificationAssignment', function($query) {
             $query->where('assignee_id', Auth::id());
         })
         ->whereYear('created_at', date('Y'))
@@ -42,16 +42,19 @@ class DashboardController extends Controller
         ->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('m');
         });
-        
 
-        $submittedReports = DB::table('reports')
-        ->select('*')
+        $submittedReports = Report::select('id')
         ->where('creator_id', Auth::id())
         ->whereYear('created_at', date('Y'))
         ->get()
         ->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('m');
         });
+
+        $leaderboard = User::select('id', 'username', 'reputation')
+        ->orderBy('reputation', 'desc')
+        ->limit(10)
+        ->get();
 
         foreach ($submittedReports as $key => $value) {
             $reportCount[(int)$key] = count($value);
@@ -100,6 +103,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', [
             'activeReports' => $activeReports,
             'activeVerifications' => $activeVerifications,
+            'leaderboard' => $leaderboard,
             'chart' => $chart
         ]);
     }

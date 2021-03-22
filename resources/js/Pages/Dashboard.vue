@@ -11,7 +11,7 @@
                 <div class="grid gap-4 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 h-auto">
 
                     <span class="bg-white col-span-2 shadow-xl">
-                         <stats :chart="chart"/>
+                         <stats :chart="chart" :leaderboard="leaderboard"/>
                     </span>
 
                     <span class="bg-white col-span-4 shadow-xl h-auto">
@@ -39,7 +39,7 @@
     
 
     export default {
-        props: ['activeReports', 'activeVerifications', 'chart'],
+        props: ['activeReports', 'activeVerifications', 'leaderboard', 'chart'],
         
         
 
