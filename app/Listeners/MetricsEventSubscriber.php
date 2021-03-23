@@ -4,7 +4,7 @@
 namespace App\Listeners;
 
 
-use App\Services\Metrics\UserMetric;
+use App\Services\UserMetrics\UserMetric;
 
 class MetricsEventSubscriber
 {

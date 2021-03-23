@@ -17,7 +17,7 @@ class CreateVerificationAssignmentsTable extends Migration
             $table->id();
             $table->foreignId('verification_batch_id')->constrained();
             $table->foreignId('assignee_id')->constrained('users');
-            $table->enum('status', array('pending', 'complete'))->default('pending');
+            $table->enum('status', array('pending', 'complete', 'cancelled'))->default('pending');
             $table->timestamp('actioned_at')->nullable();
             $table->timestamps();
         });

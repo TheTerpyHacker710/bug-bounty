@@ -1,15 +1,13 @@
 <template>
   <div class="mb-3">
-    <div>
-      <label :for="textAreaId" class="">Step {{ stepNumber + 1 }}</label>
-      <button type="button" class="float-right inline-block" @click="removeStep">Remove Step</button>
+    <div class="flex items-baseline">
+      <label :for="textAreaId" class="inline-flex text-lg mr-2">Step {{ stepNumber + 1 }}</label>
+      <Button class="xl:hidden my-1 mx-1" type="button" @click="toggleShowCompiled">Toggle Preview</Button>
+      <SecondaryButton type="button" class="inline-flex my-1 mx-1" @click="removeStep">Remove Step</SecondaryButton>
     </div>
-    <div class="md:hidden">
-      <button type="button" @click="toggleShowCompiled">Toggle</button>
-    </div>
-    <div class="flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
-      <textarea rows=4 :id="textAreaId" :value="markdownInput" class="md:w-1/2" :class="editorViewClasses" @input="updateMarkdown"></textarea>
-      <div class="md:w-1/2 overflow-auto border p-2" :class="compiledViewClasses" v-html="compiledMarkdown"></div>
+    <div class="flex flex-col space-y-2 xl:flex-row xl:space-x-2 xl:space-y-0">
+      <textarea rows=4 :id="textAreaId" :value="markdownInput" class="xl:w-1/2" :class="editorViewClasses" @input="updateMarkdown"></textarea>
+      <div class="markdown xl:w-1/2 overflow-auto border p-2" :class="compiledViewClasses" v-html="compiledMarkdown"></div>
     </div>
   </div>
 </template>
@@ -17,9 +15,12 @@
 <script>
 import DOMPurify from "dompurify";
 import marked from "marked";
+import Button from "../../Jetstream/Button";
+import SecondaryButton from "../../Jetstream/SecondaryButton";
 
 export default {
   name: "ReportStep",
+  components: {Button, SecondaryButton},
   props: {
     id: Number,
     stepNumber: Number,
@@ -42,13 +43,13 @@ export default {
     editorViewClasses: function() {
       return {
         hidden: this.showCompiled,
-        'md:block': this.showCompiled,
+        'xl:block': this.showCompiled,
       }
     },
     compiledViewClasses: function() {
       return {
         hidden: !this.showCompiled,
-        'md:block': !this.showCompiled,
+        'xl:block': !this.showCompiled,
       }
     },
   },

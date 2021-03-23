@@ -2,13 +2,18 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\VerificationsController;
 use App\Listeners\MetricsEventSubscriber;
 use App\Listeners\TipsEventSubscriber;
 use App\Services\DifficultyCalculators\DifficultyCalculator;
-use App\Services\Metrics\ActivityScore;
-use App\Services\Metrics\Competence;
-use App\Services\Metrics\HitRate;
-use App\Services\Metrics\UserMetric;
+use App\Services\ReportMetrics\ProcedureMetric;
+use App\Services\ReportMetrics\ReportMetric;
+use App\Services\ReportMetrics\VulnerabilityMetric;
+use App\Services\UserMetrics\ActivityScore;
+use App\Services\UserMetrics\Competence;
+use App\Services\UserMetrics\HitRate;
+use App\Services\UserMetrics\UserMetric;
 use App\Services\Tips\DummyTip;
 use App\Services\Tips\Tip;
 use App\Services\VerificationAssigners\VerificationAssigner;
@@ -34,14 +39,17 @@ class BugBountyServiceProvider extends ServiceProvider
         $difficultyCalculatorClass = config('bugbounty.difficultyCalculator');
         $this->app->bind(DifficultyCalculator::class, $difficultyCalculatorClass);
         // register tips
-        $this->app->when(TipsEventSubscriber::class)->needs(Tip::class)->give([
-            DummyTip::class,
-        ]);
-        $this->app->when(MetricsEventSubscriber::class)->needs(UserMetric::class)->give([
-            ActivityScore::class,
-            HitRate::class,
-            Competence::class,
-        ]);
+        $this->app->when(TipsEventSubscriber::class)->needs(Tip::class)->give(config('bugbounty.tips'));
+        $this->app->when(MetricsEventSubscriber::class)->needs(UserMetric::class)->give(config('bugbounty.userMetrics'));
+        // register report metrics
+        $this->app->when(ReportsController::class)->needs(VulnerabilityMetric::class)->give(config('bugbounty.vulnerabilityMetrics'));
+        $this->app->when(VerificationsController::class)
+            ->needs(ReportMetric::class)
+            ->give(
+                array_merge(
+                    config('bugbounty.vulnerabilityMetrics'),
+                    config('bugbounty.procedureMetrics')));
+        //$this->app->when(VerificationsController::class)->needs(ProcedureMetric::class)->give(config('bugbounty.procedureMetrics'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Metrics;
+namespace App\Services\UserMetrics;
 
 
 use App\Events\VerificationBatchCompleted;
@@ -19,9 +19,13 @@ class Competence extends UserMetric
         $result = [];
         foreach ($users as $user) {
             // average voted complexity of verified reports
-            $result[$user] = VerificationBatch::where('status', 'accepted')->whereHas('report', function ($query) use($user) {
+            $r = VerificationBatch::where('status', 'accepted')->whereHas('report', function ($query) use($user) {
                 $query->where('creator_id', $user)->where('status', 'verified');
-            })->get()->pluck('voted_complexity')->average();
+            })->get()->pluck('voted_vulnerability_metrics.Complexity')->average();
+            if ($r == null) {
+                $r = 0;
+            }
+            $result[$user] = $r;
         }
         return $result;
     }
