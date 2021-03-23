@@ -11,7 +11,7 @@
                         <active-verifications :verification="verification" />
                     </div>
                 </ul>
-                
+
                 <ul v-else>
                     <li class="text-center py-4 italic font-thin">No Active Verifications</li>
                 </ul>
@@ -20,7 +20,7 @@
         <span class="px-4 py-4 border-4">
                 <h2 class="text-center py-2">Active Reports</h2>
                 <ul v-if="activeReports.length > 0">
-                    <div :key="report.program.id" v-for="report in activeReports" class="py-2">
+                    <div :key="report.id" v-for="report in activeReports" class="py-2">
                         <active-report :report="report"/>
                     </div>
                 </ul>
@@ -30,13 +30,13 @@
                 </ul>
         </span>
     </div>
-    
+
 </template>
 
 <script>
 
-import ActiveReport from './ActiveReport.vue'
-import ActiveVerifications from './ActiveVerifications.vue'
+import ActiveReport from '../Dashboard/ActiveReport.vue'
+import ActiveVerifications from '../Dashboard/ActiveVerifications.vue'
 
 export default {
     props: ['activeReports', 'activeVerifications'],

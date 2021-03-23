@@ -19,7 +19,7 @@ class UsersController extends Controller
     {
         $users = User::all();
 
-        return Inertia::render('Users/Index', [
+        return Inertia::render('Admin/Users/Index', [
             'users' => $users,
     ]);
     }
@@ -31,7 +31,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Users/Create');
+        return Inertia::render('Admin/Users/Create');
     }
 
     /**
@@ -45,13 +45,17 @@ class UsersController extends Controller
         $request->validate([
            'name' => 'required|min:5',
            'email' => 'required|email|unique:users',
-           'password' => 'required|min:8'
+           'password' => 'required|min:8',
+            'username' => 'required|min:5',
+            'org_id' => 'required',
         ]);
 
         User::create([
            'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'username' => $request->username,
+            'org_id' => $request->org_id
         ]);
 
         return redirect()->route('users.index')->with('successMessage', 'User was successfully added');
@@ -76,7 +80,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return Inertia::render('Users/Edit', [
+        return Inertia::render('Admin/Users/Edit', [
            'user' => $user,
         ]);
     }
@@ -93,11 +97,15 @@ class UsersController extends Controller
         $request->validate([
            'name' => 'required',
            'email' => 'required|unique:users,email,'.$user->id,
+            'username' => 'required',
+            'org_id' => 'required',
         ]);
 
         $user->update([
            'name' => $request->name,
-           'email' => $request->email
+           'email' => $request->email,
+            'username' => $request->username,
+            'org_id' => $request->org_id
         ]);
 
         return redirect()->route('users.index')->with('successMessage', 'User was successfully updated');

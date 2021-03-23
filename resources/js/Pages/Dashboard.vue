@@ -1,24 +1,24 @@
 <template>
     <app-layout>
-        <!-- <template #header>
+        <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 User Dashboard
             </h2>
-        </template> -->
+        </template>
 
         <div class="py-6 px-6">
             <div class="max-w-full mx-auto">
-                <div class="grid gap-4 grid-cols-8 h-auto">
+                <div class="grid gap-4 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 h-auto">
 
-                    <span class="bg-white col-span-2 shadow">
-                         <stats/>
+                    <span class="bg-white col-span-2 shadow-xl">
+                         <stats :chart="chart"/>
                     </span>
 
-                    <span class="bg-white col-span-4 shadow">
-                        <active-jobs :activeReports="activeReports"/>
+                    <span class="bg-white col-span-4 shadow-xl">
+                        <active-jobs :activeReports="activeReports" :activeVerifications="activeVerifications"/>
                     </span>
 
-                    <span class="bg-white col-span-2 shadow">
+                    <span class="bg-white col-span-2 shadow-xl">
                         <awards/>
                     </span>
 
@@ -35,9 +35,13 @@
     import Stats from '@/Pages/Dashboard/Stats'
     import ActiveJobs from '@/Pages/Dashboard/ActiveJobs'
     import Awards from '@/Pages/Dashboard/Awards'
+    
+    
 
     export default {
-        props: ['activeReports'],
+        props: ['activeReports', 'activeVerifications', 'chart'],
+        
+        
 
         components: {
             AppLayout,

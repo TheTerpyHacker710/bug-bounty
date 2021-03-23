@@ -14,8 +14,9 @@ class CreateUserSkillsTable extends Migration
     public function up()
     {
         Schema::create('user_skills', function (Blueprint $table) {
-            $table->id('user_id');
-            $table->string('tag_id');
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('tag_id');
         });
     }
 

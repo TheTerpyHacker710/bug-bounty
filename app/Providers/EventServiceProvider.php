@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Listeners\ActivityScoreEventSubscriber;
 use App\Listeners\CompetenceEventSubscriber;
 use App\Listeners\HitRateEventSubscriber;
+use App\Listeners\MetricsEventSubscriber;
+use App\Listeners\TipsEventSubscriber;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,9 +26,11 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-        HitRateEventSubscriber::class,
-        ActivityScoreEventSubscriber::class,
-        CompetenceEventSubscriber::class,
+//        HitRateEventSubscriber::class,
+//        ActivityScoreEventSubscriber::class,
+//        CompetenceEventSubscriber::class,
+        MetricsEventSubscriber::class,
+        TipsEventSubscriber::class,
     ];
 
     /**
