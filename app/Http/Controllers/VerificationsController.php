@@ -47,24 +47,16 @@ class VerificationsController extends Controller
             $selectedAssignment = (int)(request()->validate([
                 'assignment' => 'integer'
             ])['assignment']);
-<<<<<<< HEAD
             return Inertia::render('Reporting/Verify', [
                 "assignments" => $assignments,
                 "selectedAssignment" => $selectedAssignment,
                 'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
                 'procedureMetrics' => $this->procedureMetrics,
-=======
-
-            return Inertia::render('Verify', [
-                "assignments" => $assignments,
-                "selectedAssignment" => $selectedAssignment,
->>>>>>> master
             ]);
 
         }
         else if($assignments->first()) {
             $selectedAssignment = $assignments->first()->id;
-<<<<<<< HEAD
             return Inertia::render('Reporting/Verify', [
                 "assignments" => $assignments,
                 "selectedAssignment" => $selectedAssignment,
@@ -79,20 +71,6 @@ class VerificationsController extends Controller
                 'procedureMetrics' => $this->procedureMetrics,
             ]);
         }
-=======
-            return Inertia::render('Verify', [
-                "assignments" => $assignments,
-                "selectedAssignment" => $selectedAssignment,
-            ]);
-        }
-        else {
-            return Inertia::render('Verify', [
-                "assignments" => $assignments,
-            ]);
-        }
-
-        
->>>>>>> master
     }
 
     public function store()
