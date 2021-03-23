@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Metrics;
+namespace App\Services\UserMetrics;
 
 
 use App\Events\ReportSubmitted;

@@ -50,6 +50,10 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
     '/verify', [VerificationsController::class, 'store']
 );
 
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/cancelVerification', [VerificationsController::class, 'cancel']
+);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
     if(Auth::user()->isVendor == 1){
         return Inertia::render('Vendor');

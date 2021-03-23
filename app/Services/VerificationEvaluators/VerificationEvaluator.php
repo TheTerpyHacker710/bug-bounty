@@ -49,12 +49,33 @@ abstract class VerificationEvaluator
     private function synthesizeVotes($verificationBatch) {
         // get verification submissions
         $submissions = $verificationBatch->verificationSubmissions;
-        // set average values
-        $verificationBatch->voted_quality = $submissions->avg->quality;
-        $verificationBatch->voted_detail = $submissions->avg->detail;
-        $verificationBatch->voted_severity = $submissions->avg->severity;
-        $verificationBatch->voted_complexity = $submissions->avg->complexity;
-        $verificationBatch->voted_reliability = $submissions->avg->reliability;
+        // calculate average votes
+        $procedureMetrics = $this->synthesizeMetrics('procedure_metrics', $submissions);
+        $vulnerabilityMetrics = $this->synthesizeMetrics('vulnerability_metrics', $submissions);
+        // save average votes
+        $verificationBatch->voted_procedure_metrics = $procedureMetrics;
+        $verificationBatch->voted_vulnerability_metrics = $vulnerabilityMetrics;
         $verificationBatch->save();
+    }
+
+    private function synthesizeMetrics($colName, $submissions) {
+        $len = count($submissions);
+        return $submissions
+            // get all procedure metric arrays in one array
+            ->pluck($colName)
+            ->reduce(function($carry, $item) {
+                $result = $carry;
+                foreach ($item as $metric => $value) {
+                    if (isset($result[$metric])) {
+                        $result[$metric] += $value;
+                    } else {
+                        $result[$metric] = $value;
+                    }
+                }
+                return $result;
+            }, collect(array()))
+            ->map(function($item) use ($len) {
+                return $item / $len;
+            });
     }
 }

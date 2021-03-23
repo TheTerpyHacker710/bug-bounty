@@ -16,10 +16,9 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('program_id')->constrained('programs');
+            $table->string('title');
             $table->json('procedure');
-            $table->integer('severity');
-            $table->integer('complexity');
-            $table->integer('reliability');
+            $table->json('metrics');
             $table->foreignId('creator_id')->constrained('users');
             $table->enum('status', array('pending', 'verified', 'rejected'))->default('pending');
             $table->timestamp('completed_at')->nullable();

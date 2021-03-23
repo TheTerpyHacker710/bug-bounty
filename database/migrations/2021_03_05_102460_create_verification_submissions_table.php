@@ -17,11 +17,8 @@ class CreateVerificationSubmissionsTable extends Migration
             $table->id();
             $table->foreignId('verification_assignment_id')->constrained();
             $table->boolean('verifiable');
-            $table->integer('quality');
-            $table->integer('detail');
-            $table->integer('severity');
-            $table->integer('complexity');
-            $table->integer('reliability');
+            $table->json('vulnerability_metrics');
+            $table->json('procedure_metrics');
             $table->timestamps();
         });
     }
