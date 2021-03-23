@@ -18,37 +18,43 @@
             </div>
         </div>
 
-        <div class="py-3">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="flex flex-col">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
 
-                <table class="table-fixed">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Organisation ID</th>
+                                    <th scope="col" class="relative px-6 py-3">Actions</th>
+                                </tr>
+                                </thead>
 
-                    <thead>
-                    <tr>
-                        <th class="px-4 py-2 w-20">Name</th>
-                        <th class="px-4 py-2 w-20">Email</th>
-                        <th class="px-4 py-2 w-20">Username</th>
-                        <th class="px-4 py-2 w-30">Organisation ID</th>
-                        <th class="px-4 py-2 w-20">Actions</th>
-                    </tr>
-                    </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tr v-for="user in users" :key="user.id">
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.username }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.org_id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900">
+                                    <inertia-link :href="`/admin/users/${user.id}/edit`">Edit</inertia-link>
+                                    </td>
+                                </tr>
+                                </tbody>
 
-                    <tbody>
-                    <tr v-for="user in users" :key="user.id">
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.org_id }}</td>
-                        <inertia-link :href="`/admin/users/${user.id}/edit`">Edit</inertia-link>
-                    </tr>
-                    </tbody>
+                            </table>
 
-                </table>
-
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </admin-layout>
 </template>
 

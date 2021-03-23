@@ -1,4 +1,4 @@
-<!--Page once navigated to /users/create-->
+<!--Page once navigated to /admin/users/create-->
 
 <template>
     <admin-layout>

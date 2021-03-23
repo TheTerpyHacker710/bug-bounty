@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveReportsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\VerificationsController;
 use Illuminate\Foundation\Application;
@@ -60,13 +61,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
 
 Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 
+//Admin Links
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', function () {
     return Inertia::render('Admin/Dashboard');
 })->name('adminDashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/reports', function () {
-    return Inertia::render('Admin/Reports');
-})->name('Reports');
+//Route::middleware(['auth:sanctum', 'verified'])->get('/admin/reports', function () {
+//    return Inertia::render('Admin/Reports');
+//})->name('Reports');
+
+Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
+    ->name('Reports')
+    ->middleware('auth');
 
 Route::get('/admin/users', 'App\Http\Controllers\UsersController@index')->name('users.index');
 Route::get('/admin/users/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
