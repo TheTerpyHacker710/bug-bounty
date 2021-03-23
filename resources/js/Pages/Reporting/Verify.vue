@@ -103,12 +103,13 @@ export default {
   },
   props: {
     assignments: Array,
+    selectedAssignment: Number,
     vulnerabilityMetrics: Array,
     procedureMetrics: Array,
   },
   data() {
     return {
-      currentReport: this.assignments.length > 0 ? 0 : -1,
+      currentReport: this.findAssignment(this.selectedAssignment),
       form: {
         assignmentId: this.assignments.length > 0 ? this.assignments[0]["id"] : -1,
         verifiable: false,
@@ -154,7 +155,25 @@ export default {
     cancelAssignment() {
       let data = { id: this.assignments[this.currentReport]['id'] }
       this.$inertia.post('/cancelVerification', data)
-    }
+    },
+    findAssignment: function(id) {
+      console.log(id);
+      if (this.assignments.length > 0)
+        if (id != null) {
+          // find report
+          let index = this.assignments.findIndex(assignment => {
+            return assignment["id"] == this.selectedAssignment
+          });
+          if (index >= 0) {
+            return index;
+          } else {
+            return 0
+          }
+        } else {
+          return 0
+        }
+      return -1;
+    },
   },
   mounted() {
     this.initVulnerabilityMetrics()

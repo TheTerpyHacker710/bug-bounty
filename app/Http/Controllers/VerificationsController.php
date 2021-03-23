@@ -43,11 +43,34 @@ class VerificationsController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return Inertia::render('Reporting/Verify', [
-            'assignments' => $assignments,
-            'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
-            'procedureMetrics' => $this->procedureMetrics,
-        ]);
+        if(request()->get('assignment')) {
+            $selectedAssignment = (int)(request()->validate([
+                'assignment' => 'integer'
+            ])['assignment']);
+            return Inertia::render('Reporting/Verify', [
+                "assignments" => $assignments,
+                "selectedAssignment" => $selectedAssignment,
+                'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
+                'procedureMetrics' => $this->procedureMetrics,
+            ]);
+
+        }
+        else if($assignments->first()) {
+            $selectedAssignment = $assignments->first()->id;
+            return Inertia::render('Reporting/Verify', [
+                "assignments" => $assignments,
+                "selectedAssignment" => $selectedAssignment,
+                'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
+                'procedureMetrics' => $this->procedureMetrics,
+            ]);
+        }
+        else {
+            return Inertia::render('Reporting/Verify', [
+                "assignments" => $assignments,
+                'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
+                'procedureMetrics' => $this->procedureMetrics,
+            ]);
+        }
     }
 
     public function store()
