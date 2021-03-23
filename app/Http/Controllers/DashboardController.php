@@ -24,7 +24,6 @@ class DashboardController extends Controller
         $verificationCount = [];
         $verificationArr = [];
         $monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-        $count = 0;
 
         $userInfo = Auth::user();
 
