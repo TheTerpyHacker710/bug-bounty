@@ -13,8 +13,8 @@
             <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden"
-                            ref="photo"
-                            @change="updatePhotoPreview">
+                       ref="photo"
+                       @change="updatePhotoPreview">
 
                 <jet-label for="photo" value="Photo" />
 
@@ -54,6 +54,24 @@
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
+
+            <!-- Email -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="username" value="Username" />
+                <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" />
+            </div>
+
+            <!-- Org ID -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="org_id" value="Organisation ID" />
+                <jet-input id="org_id" type="text" class="mt-1 block w-full" v-model="form.org_id" />
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="org_name" value="Organisation Name" />
+                <jet-input id="org_name" type="text" class="mt-1 block w-full" v-model="form.org_name" />
+            </div>
+
         </template>
 
         <template #actions>
@@ -96,6 +114,9 @@
                     _method: 'PUT',
                     name: this.user.name,
                     email: this.user.email,
+                    org_id: this.user.org_id,
+                    org_name: this.user.org_name,
+                    username: this.user.username,
                     photo: null,
                 }),
 
@@ -138,3 +159,4 @@
         },
     }
 </script>
+

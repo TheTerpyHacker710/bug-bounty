@@ -8,9 +8,20 @@
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
                     <update-profile-information-form :user="$page.props.user" />
 
+                    <jet-section-border />
+                </div>
+
+                <div v-if="$attrs.user['isVendor'] == 0">
+                    <vendor-form/>
+                    <jet-section-border />
+                </div>
+
+                <div>
+                    <skills-form :usertags="$page.props.usertags" v-bind="$attrs"/>
                     <jet-section-border />
                 </div>
 
@@ -46,9 +57,14 @@
     import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import SkillsForm from './SkillsForm'
+    import VendorForm from './VendorForm'
 
     export default {
-        props: ['sessions'],
+        props: {
+            sessions: Array,
+            usertags: Array,
+        },
 
         components: {
             AppLayout,
@@ -58,6 +74,9 @@
             TwoFactorAuthenticationForm,
             UpdatePasswordForm,
             UpdateProfileInformationForm,
+            SkillsForm,
+            VendorForm,
+            
         },
     }
 </script>

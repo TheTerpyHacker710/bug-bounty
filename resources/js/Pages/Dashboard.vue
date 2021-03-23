@@ -11,15 +11,15 @@
                 <div class="grid gap-4 grid-cols-4 md:grid-cols-6 lg:grid-cols-8 h-auto">
 
                     <span class="bg-white col-span-2 shadow-xl">
-                         <stats :chart="chart"/>
+                         <stats :chart="chart" :leaderboard="leaderboard"/>
                     </span>
 
-                    <span class="bg-white col-span-4 shadow-xl">
+                    <span class="bg-white col-span-4 shadow-xl h-auto">
                         <active-jobs :activeReports="activeReports" :activeVerifications="activeVerifications"/>
                     </span>
 
                     <span class="bg-white col-span-2 shadow-xl">
-                        <awards/>
+                        <awards :userInfo="userInfo"/>
                     </span>
 
                 </div>
@@ -35,13 +35,9 @@
     import Stats from '@/Pages/Dashboard/Stats'
     import ActiveJobs from '@/Pages/Dashboard/ActiveJobs'
     import Awards from '@/Pages/Dashboard/Awards'
-    
-    
 
     export default {
-        props: ['activeReports', 'activeVerifications', 'chart'],
-        
-        
+        props: ['userInfo', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
 
         components: {
             AppLayout,
