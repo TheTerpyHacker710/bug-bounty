@@ -1,4 +1,4 @@
-<!--Page once navigated to /admin-->
+<!--Page once navigated to /admin/reports-->
 
 <template>
     <admin-layout>
@@ -13,6 +13,9 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     Reports
                 </div>
+                <span class="bg-white col-span-4 shadow-xl">
+                    <admin-active-jobs :activeReports="activeReports" :activeVerifications="activeVerifications"/>
+                </span>
             </div>
         </div>
     </admin-layout>
@@ -21,11 +24,16 @@
 <script>
 import Welcome from '@/Jetstream/Welcome'
 import AdminLayout from "../../Layouts/AdminLayout";
+import AdminActiveJobs from "../Admin/AdminActiveJobs";
 
 export default {
+
+    props: ['activeReports', 'activeVerifications'],
+
     components: {
         AdminLayout,
         Welcome,
+        AdminActiveJobs
     },
 }
 </script>

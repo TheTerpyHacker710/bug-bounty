@@ -11,7 +11,7 @@
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
                                 <inertia-link :href="route('adminDashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
+<!--                                    <jet-application-mark class="block h-9 w-auto" />-->
                                 </inertia-link>
                             </div>
 
@@ -26,9 +26,6 @@
                                 <jet-nav-link :href="route('users.index')" :active="route().current('users.index')">
                                     Users
                                 </jet-nav-link>
-<!--                                <jet-nav-link href="/admin/users" :active="$page.currentRouteName == 'users.index' ">-->
-<!--                                    Users-->
-<!--                                </jet-nav-link>-->
                             </div>
                         </div>
 
@@ -223,7 +220,7 @@
                 </div>
             </nav>
 
-            <!-- Page Heading -->
+<!--             Page Heading-->
             <header class="bg-white shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>

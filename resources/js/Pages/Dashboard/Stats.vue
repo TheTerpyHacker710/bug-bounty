@@ -6,7 +6,7 @@
     <div class="grid grid-rows-2 gap-4 px-4 py-2">
           
         <span class="px-4 py-4 border-4">
-            <h2 class="text-center">Leaderboard</h2>
+            <leaderboard :leaderboard="leaderboard"/>
         </span>
 
         <span class="px-2 py-2 border-4">            
@@ -17,12 +17,14 @@
 
 <script>
 import Chart from '@/Pages/Dashboard/Chart';
+import Leaderboard from '@/Pages/Dashboard/Leaderboard';
 
 export default {
-    props: ['chart'],
+    props: ['chart', 'leaderboard'],
 
     components: {
-        Chart    
+        Chart,
+        Leaderboard,
     },
 
     data() {
