@@ -18,11 +18,8 @@ class CreateVerificationBatchesTable extends Migration
             $table->foreignId('report_id')->constrained();
             $table->enum('status', array('pending', 'accepted', 'reassigned'))->default('pending');
             $table->timestamp('completed_at')->nullable();
-            $table->integer('voted_quality')->nullable();
-            $table->integer('voted_detail')->nullable();
-            $table->integer('voted_severity')->nullable();
-            $table->integer('voted_complexity')->nullable();
-            $table->integer('voted_reliability')->nullable();
+            $table->json('voted_procedure_metrics')->nullable();
+            $table->json('voted_vulnerability_metrics')->nullable();
             $table->timestamps();
         });
     }

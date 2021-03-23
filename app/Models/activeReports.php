@@ -19,6 +19,6 @@ class activeReports extends Model
     }
 
     public function program() {
-        return $this->belongsTo(Programs::class);
+        return $this->belongsTo(Program::class);
     }
 }

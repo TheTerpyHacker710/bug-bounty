@@ -9,14 +9,14 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['program_id', 'procedure', 'severity', 'complexity', 'reliability', 'creator_id'];
+    protected $fillable = ['program_id', 'procedure', 'metrics', 'creator_id', 'title'];
 
     public function creator() {
         return $this->belongsTo(User::class, 'creator_id');
     }
 
     public function program() {
-        return $this->belongsTo(Programs::class, 'program_id');
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public function verificationBatches() {
