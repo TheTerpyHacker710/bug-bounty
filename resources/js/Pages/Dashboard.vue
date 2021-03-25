@@ -31,7 +31,6 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import Welcome from '@/Jetstream/Welcome'
     import Stats from '@/Pages/Dashboard/Stats'
     import ActiveJobs from '@/Pages/Dashboard/ActiveJobs'
     import Awards from '@/Pages/Dashboard/Awards'
@@ -41,7 +40,6 @@
 
         components: {
             AppLayout,
-            Welcome,
             Stats,
             ActiveJobs,
             Awards
