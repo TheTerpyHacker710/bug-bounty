@@ -1,6 +1,8 @@
 <template>
     <home-nav-layout :canLogin="canLogin" :canRegister="canRegister"/>
-    <h2>Hello World</h2>
+    <div class="min-h-screen bg-gray-100">
+        <h2>Hello World</h2>
+    </div>
 </template>
 
 <script>
