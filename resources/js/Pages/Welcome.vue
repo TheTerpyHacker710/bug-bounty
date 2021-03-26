@@ -11,7 +11,7 @@
                         <p class="px-4">{{program.Excerpt}}</p>
                         
                         <div class="absolute right-0 px-1 flex flex-col lg:-my-px lg:mr-8 lg:ml-10 lg:flex-row lg:justify-items-center">
-                            <inertia-link v-if="activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id }" class="no-underline text-center inline-block text-sm px-4 py-2 leading-none border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 lg:mt-4 sm:mt-0">
+                            <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id }" class="no-underline text-center inline-block text-sm px-4 py-2 leading-none border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 lg:mt-4 sm:mt-0">
                                 Join
                             </inertia-link>
                             <inertia-link :href="route('home')" class="no-underline text-center inline-block text-sm px-4 py-2 lg:mr-2 lg:ml-2 leading-none border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 lg:mt-4 sm:mt-0">
