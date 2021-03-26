@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActiveReportsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\VerificationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +23,8 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
+Route::get('/', [ProgramsController::class, 'index'])->name('home');
+Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
