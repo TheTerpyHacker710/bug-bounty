@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\activeReports;
 use App\Models\VerificationAssignment;
 use Inertia\Inertia;
+use Carbon\Carbon;
 
 class ActiveReportsController extends Controller
 {
@@ -29,11 +30,17 @@ class ActiveReportsController extends Controller
    }
 
    public function create() {
-        //create a new active report
+        //show form to create new active report
    }
 
-   public function store() {
+   public function store(Request $request) {
         //store a new active report
+        $activeReport = new activeReports;
+        $activeReport->user_id = $request->user_id;
+        $activeReport->program_id = $request->program_id;
+        $activeReport->save();
+
+        return redirect('/');
    }
 
    public function edit() {
