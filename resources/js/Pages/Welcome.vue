@@ -18,7 +18,7 @@
                             <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id }" class="no-underline text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
                                 Join
                             </inertia-link>
-                            <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 my-1 lg:mr-2 lg:ml-2 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                            <inertia-link :href="'/program/' + program.id" class="no-underline text-center text-sm px-4 py-2 my-1 lg:mr-2 lg:ml-2 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                                 View
                             </inertia-link>
 

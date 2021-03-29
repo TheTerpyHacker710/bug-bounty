@@ -31,8 +31,13 @@ class ProgramsController extends Controller
         ]);
     }
 
-    public function show() {
-
+    public function show($program_id) {
+        $program = Program::find($program_id);
+        return Inertia::render('Program', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'program' => $program,
+        ]);
     }
 
     public function create() {
