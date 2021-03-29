@@ -19,6 +19,7 @@ class DummyTipGenerator extends TipGenerator
         $user = $event->verificationBatch->report->creator_id;
         $tip = new Tip;
         $tip->user_id = $user;
+        $tip->type = get_class($this);
         $tip->location_tag = 'report';
         $tip->content = 'Hello, this is a tip!';
         $tip->save();
