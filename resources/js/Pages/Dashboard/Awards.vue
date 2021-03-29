@@ -5,7 +5,8 @@
 
     <div class="grid grid-row-2 gap-4 px-1 py-1">
         <span class="px-4 py-4 border-4">
-            <div :key="badge.badge_id" v-for="badge in userBadges">
+            <h2 class="text-center py-4">Awards/Trophy's</h2>
+            <div :key="badge.badge_id" v-for="badge in userBadges" class="border-t border-gray-500 py-2 my-2">
                 <badges :badge="badge"/>
             </div>
         </span>
