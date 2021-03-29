@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActiveReportsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\VerificationsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -22,14 +23,29 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
+Route::get('/', [ProgramsController::class, 'index'])->name('home');
+Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram');
+
+Route::get('/about', function () {
+    return Inertia::render('About', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('About');
+
+Route::get('/contact', function () {
+    return Inertia::render('About', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('Contact');
+
+Route::get('/help', function () {
+    return Inertia::render('About', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+})->name('Help');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard')
@@ -51,15 +67,22 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
     '/verify', [VerificationsController::class, 'store']
 );
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
-    if(Auth::user()->isVendor == 1){
-        return Inertia::render('Vendor');
-    }else{
-        return abort(403);
-    }
-})->name('vendor');
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/cancelVerification', [VerificationsController::class, 'cancel']
+);
+
+Route::middleware(['auth:sanctum', 'verified'])->get(
+    '/vendor', [VendorController::class, 'vendorDashboard']
+)->name('Vendor');
+
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/program-delete', [VendorController::class, 'programDelete']);
+
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    'vendor-apply', [VendorController::class, 'vendorApply']);
 
 Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
+Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
 //Admin Links
 

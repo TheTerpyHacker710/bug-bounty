@@ -1,10 +1,11 @@
 <template>
     <div class="text-center px-4 py-4">
         <h2>Active Jobs</h2>
+        
     </div>
 
     <div class="grid grid-cols-2 gap-4 px-1 py-1 h-auto">
-        <span class="px-4 py-4 border-4 h-full">
+        <span class="px-4 py-4 border-4 h-full ">
                 <h2 class="text-center py-2">Reports to Verify</h2>
                 <ul v-if="activeVerifications.length > 0">
                     <div v-for="verification in activeVerifications" :key="verification.id" class="py-2">
@@ -27,6 +28,7 @@
 
                 <ul v-else>
                     <li class="text-center py-4 italic font-thin">No Active Reports</li>
+                    <li class="text-center italic font-thin text-sm"><a href="/" class="no-underline text-blue-400 hover:underline">Look at programs!</a></li>
                 </ul>
         </span>
     </div>

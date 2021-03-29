@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\activeReports;
-use App\Models\Programs;
+use App\Models\Program;
 use App\Models\Report;
 use App\Models\User;
 use App\Models\VerificationAssignment;
@@ -24,13 +24,16 @@ class DashboardController extends Controller
         $verificationCount = [];
         $verificationArr = [];
         $monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-        $count = 0;
 
         $userInfo = Auth::user();
+        
+        //collection of users badges
+        $userBadges = $userInfo->badges;
 
         $activeReports = Auth::user()->activeReports->load('program');
 
         $activeVerifications = VerificationAssignment::where('assignee_id', Auth::id())
+        ->where('status', 'pending')
         ->with(['verificationBatch:id,report_id', 'verificationBatch.report:id,procedure,program_id', 'verificationBatch.report.program:id,Title,Excerpt']) 
         ->orderBy('created_at')
         ->get();
@@ -108,7 +111,8 @@ class DashboardController extends Controller
             'activeReports' => $activeReports,
             'activeVerifications' => $activeVerifications,
             'leaderboard' => $leaderboard,
-            'chart' => $chart
+            'chart' => $chart,
+            'userBadges' => $userBadges,
         ]);
     }
 }

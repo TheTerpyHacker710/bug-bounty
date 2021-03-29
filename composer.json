@@ -11,6 +11,7 @@
         "php": "^7.3|^8.0",
         "arielmejiadev/larapex-charts": "^2.1",
         "consoletvs/charts": "^7.2",
+        "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
