@@ -16,6 +16,7 @@ class CreateTipsTable extends Migration
         Schema::create('tips', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('type');
             $table->string('location_tag');
             $table->string('content');
             $table->timestamp('read_at')->nullable();
