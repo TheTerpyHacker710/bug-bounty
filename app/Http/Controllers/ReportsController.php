@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ReportSubmitted;
 use App\Jobs\AssignVerifiers;
 use App\Models\Program;
+use App\Models\Tip;
 use App\Services\ReportMetrics\ReportMetric;
 use App\Services\ReportMetrics\VulnerabilityMetric;
 use Illuminate\Support\Facades\Auth;
@@ -17,18 +18,19 @@ class ReportsController extends Controller
     protected $reportMetrics;
 
     public function __construct(VulnerabilityMetric ... $reportMetrics) {
-//        $this->reportMetrics = array_map(function($m) {
-//            return (array) $m;
-//        }, $reportMetrics);
         $this->reportMetrics = $reportMetrics;
     }
 
     public function create()
     {
+        // get a relevant tip if one exists
+        $tip = Tip::getNext(Auth::id(), 'report');
+
         $programs = Program::select('id', 'Title')->get();
         return Inertia::render('Reporting/CreateReport', [
             'reportMetrics' => $this->reportMetrics,
             'programs' => $programs,
+            'tip' => $tip,
         ]);
     }
 

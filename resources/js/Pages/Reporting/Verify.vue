@@ -18,9 +18,14 @@
 
               <!-- Verification form -->
               <div class="w-2/3 m-2">
+                <!-- Tip -->
+                <div v-if="tip != null">
+                  <span class="block mb-3 text-lg">Tip: {{ tip }}</span>
+                </div>
                 <div>
-                  <h3 class="text-lg font-bold mb-3">First, follow the steps below to see if you can reproduce this
+                  <h3 v-if="currentStatus == 'pending'" class="text-lg font-bold mb-3">First, follow the steps below to see if you can reproduce this
                     vulnerability report:</h3>
+                  <h3 v-else class="text-lg font-bold mb-3">Here is the procedure for this report:</h3>
                   <div v-for="(step, index) in currentProcedure" class="">
                     <h2 class="text-lg mb-2 mt-3">Step {{ index + 1 }}</h2>
                     <div :id="'step-' + index + '-text'" class="markdown border p-2"
@@ -106,6 +111,7 @@ export default {
     selectedAssignment: Number,
     vulnerabilityMetrics: Array,
     procedureMetrics: Array,
+    tip: String,
   },
   data() {
     return {

@@ -6,7 +6,7 @@ use App\Services\ReportMetrics\Detail;
 use App\Services\ReportMetrics\Quality;
 use App\Services\ReportMetrics\Reliability;
 use App\Services\ReportMetrics\Severity;
-use App\Services\Tips\DummyTip;
+use App\Services\TipGenerators\DummyTipGenerator;
 use App\Services\UserMetrics\ActivityScore;
 use App\Services\UserMetrics\Competence;
 use App\Services\UserMetrics\HitRate;
@@ -23,7 +23,7 @@ return [
         HitRate::class,
     ],
     'tips' => [
-        DummyTip::class,
+        DummyTipGenerator::class,
     ],
     // Vulnerability metrics which the reporter will indicate and which will also be assessed by verifiers
     'vulnerabilityMetrics' => [

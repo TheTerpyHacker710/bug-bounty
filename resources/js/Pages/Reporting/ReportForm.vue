@@ -1,6 +1,11 @@
 <template>
   <!-- Form only fills 3/4 of the main panel on medium devices and larger -->
   <div class="md:w-3/4 mx-auto mt-12 mb-5">
+    <!-- Tip -->
+    <div v-if="tip != null">
+      <span class="block mb-3 text-lg">Tip: {{ tip }}</span>
+    </div>
+
     <form @submit.prevent="submitReport">
       <!-- Program selection -->
       <div class="mb-3">
@@ -106,6 +111,7 @@ export default {
   props: {
     reportMetrics: Array,
     programs: Array,
+    tip: String,
   },
   data() {
     return {
