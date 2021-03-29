@@ -25,7 +25,8 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [ProgramsController::class, 'index'])->name('home');
-Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram');
+Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram'); //TODO: Show a single program
+Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
 
 Route::get('/about', function () {
     return Inertia::render('About', [

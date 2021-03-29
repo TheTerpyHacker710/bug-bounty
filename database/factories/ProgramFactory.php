@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Program;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProgramFactory extends Factory
@@ -25,7 +26,7 @@ class ProgramFactory extends Factory
             'Title' => 'Program ' . $this->faker->unique()->numberBetween(1, 100000),
             'Description' => 'A program',
             'Excerpt' => 'A program',
-            'Vendor Contact' => $this->faker->companyEmail,
+            'VendorID' => User::all()->where('isVendor',  '1')->random()->id,
             'Exclusive' => false,
             'Vendor Approval' => false,
         ];
