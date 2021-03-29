@@ -5,7 +5,7 @@
 
     <div class="grid grid-row-2 gap-4 px-1 py-1">
         <span class="px-4 py-4 border-4">
-            <h2 class="text-center">Awards/Trophy's</h2>
+            <badges :userBadges="userBadges"/>
         </span>
 
         <span class="px-4 py-4 border-4">
@@ -18,12 +18,14 @@
 <script>
 
 import AccountInformation from './AccountInformation.vue';
+import Badges from '@/Pages/Dashboard/Badges';
 
 export default {
-    props: ['userInfo'],
+    props: ['userInfo','userBadges'],
 
     components: {
         AccountInformation,
+        Badges,
     },
 }
 
