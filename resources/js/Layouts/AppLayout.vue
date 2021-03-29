@@ -162,6 +162,19 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('Report')" :active="route().current('Report')">
+                            Report
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('Verify')" :active="route().current('Verify')">
+                            Verify
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link v-if="$page.props.user.isVendor == 1" :href="route('Vendor')" :active="route().current('Vendor')">
+                            Vendor
+                        </jet-responsive-nav-link>
+
+                        <jet-responsive-nav-link v-if="$page.props.user.isAdmin == 1" :href="route('adminDashboard')" :active="route().current('adminDashboard')">
+                            Admin
+                        </jet-responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
