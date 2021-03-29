@@ -36,7 +36,7 @@
     import Awards from '@/Pages/Dashboard/Awards'
 
     export default {
-        props: ['userInfo', 'userBadges', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
+        props: ['userInfo', 'activeReports', 'activeVerifications', 'leaderboard', 'chart', 'userBadges'],
 
         components: {
             AppLayout,

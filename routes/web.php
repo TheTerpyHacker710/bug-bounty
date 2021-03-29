@@ -71,15 +71,18 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
     '/cancelVerification', [VerificationsController::class, 'cancel']
 );
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/vendor', function () {
-    if(Auth::user()->isVendor == 1){
-        return Inertia::render('Vendor');
-    }else{
-        return abort(403);
-    }
-})->name('vendor');
+Route::middleware(['auth:sanctum', 'verified'])->get(
+    '/vendor', [VendorController::class, 'vendorDashboard']
+)->name('Vendor');
+
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/program-delete', [VendorController::class, 'programDelete']);
+
+Route::middleware(['auth:sanctum', 'verified'])->post(
+    'vendor-apply', [VendorController::class, 'vendorApply']);
 
 Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
+Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
 //Admin Links
 
