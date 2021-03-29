@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Services\Tips\Tip;
+use App\Services\TipGenerators\TipGenerator;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -10,7 +10,7 @@ class TipsEventSubscriber implements ShouldQueue
 {
     private $tips;
 
-    public function __construct(Tip... $tips)
+    public function __construct(TipGenerator... $tips)
     {
         $this->tips = $tips;
     }

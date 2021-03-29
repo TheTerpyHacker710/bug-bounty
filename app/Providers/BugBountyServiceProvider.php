@@ -14,8 +14,8 @@ use App\Services\UserMetrics\ActivityScore;
 use App\Services\UserMetrics\Competence;
 use App\Services\UserMetrics\HitRate;
 use App\Services\UserMetrics\UserMetric;
-use App\Services\Tips\DummyTip;
-use App\Services\Tips\Tip;
+use App\Services\TipGenerators\DummyTipGenerator;
+use App\Services\TipGenerators\TipGenerator;
 use App\Services\VerificationAssigners\VerificationAssigner;
 use App\Services\VerificationEvaluators\VerificationEvaluator;
 use Illuminate\Support\ServiceProvider;
@@ -39,7 +39,7 @@ class BugBountyServiceProvider extends ServiceProvider
         $difficultyCalculatorClass = config('bugbounty.difficultyCalculator');
         $this->app->bind(DifficultyCalculator::class, $difficultyCalculatorClass);
         // register tips
-        $this->app->when(TipsEventSubscriber::class)->needs(Tip::class)->give(config('bugbounty.tips'));
+        $this->app->when(TipsEventSubscriber::class)->needs(TipGenerator::class)->give(config('bugbounty.tips'));
         $this->app->when(MetricsEventSubscriber::class)->needs(UserMetric::class)->give(config('bugbounty.userMetrics'));
         // register report metrics
         $this->app->when(ReportsController::class)->needs(VulnerabilityMetric::class)->give(config('bugbounty.vulnerabilityMetrics'));
