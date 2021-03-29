@@ -4,6 +4,7 @@ use App\Http\Controllers\ActiveReportsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\VerificationsController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

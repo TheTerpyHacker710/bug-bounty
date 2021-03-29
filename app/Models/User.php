@@ -89,4 +89,8 @@ class User extends Authenticatable
     public function cachedMetrics() {
         return $this->hasMany(UserMetricCacheEntry::class);
     }
+
+    public function programs() {
+        return $this->hasMany(Program::class);
+    }
 }

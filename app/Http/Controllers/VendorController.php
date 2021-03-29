@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Programs;
+use App\Models\Program;
 use Auth;
 use Inertia\Inertia;
 
@@ -29,7 +29,7 @@ class VendorController extends Controller
    public static function vendorDashboard(){
 
         if(Auth::user()->isVendor == 1){
-             $vendorPrograms = Programs::where('vendorID', Auth::user()->id)->get()->toArray();
+             $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get()->toArray();
 
             return Inertia::render('Vendor', [
                     'programs' =>  $vendorPrograms,
@@ -48,7 +48,7 @@ class VendorController extends Controller
         $id = Auth::user()->id;
         
 
-        Programs::where([
+        Program::where([
             'vendorID' => $id,
             'id' => $input['id']
             ])->delete();
