@@ -48,7 +48,7 @@ class VendorController extends Controller
         $id = Auth::user()->id;
         
 
-        Programs::where([
+        Program::where([
             'vendorID' => $id,
             'id' => $input['id']
             ])->delete();

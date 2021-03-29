@@ -63,7 +63,7 @@ class ProgramsController extends Controller
         ]);
 
         
-        Programs::create([
+        Program::create([
            'Title' => $request->Title,
            'Description' => $request->Description,
            'Excerpt' => 'test',
