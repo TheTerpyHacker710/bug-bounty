@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Services\Tips;
+namespace App\Services\TipGenerators;
 
 
 use App\Models\User;
 
-abstract class Tip
+abstract class TipGenerator
 {
     // associative array of event class => handler function
     protected $eventHandlers;
@@ -19,9 +19,9 @@ abstract class Tip
             $method = $this->eventHandlers[$class];
             if (is_callable([$this, $method])) {
                 $tips = $this->$method($event);
-                foreach ($tips as $userId => $tip) {
-                    User::find($userId)->notify(new \App\Notifications\Tip($tip));
-                }
+//                foreach ($tips as $userId => $tip) {
+//                    User::find($userId)->notify(new \App\Notifications\Tip($tip));
+//                }
             }
         }
     }

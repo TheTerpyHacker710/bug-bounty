@@ -6,6 +6,7 @@ use App\Events\VerificationBatchCompleted;
 use App\Events\VerificationSubmitted;
 use App\Jobs\AddVerifer;
 use App\Jobs\EvaluateVerifications;
+use App\Models\Tip;
 use App\Models\User;
 use App\Models\VerificationAssignment;
 use App\Models\VerificationSubmission;
@@ -36,6 +37,9 @@ class VerificationsController extends Controller
 
     public function create()
     {
+        // get a relevant tip if one exists
+        $tip = Tip::getNext(Auth::id(), 'verify');
+
         // get all user's verification assignments
         $assignments = VerificationAssignment::where('assignee_id', Auth::id())
             ->where('status', '!=', 'cancelled')
@@ -52,6 +56,7 @@ class VerificationsController extends Controller
                 "selectedAssignment" => $selectedAssignment,
                 'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
                 'procedureMetrics' => $this->procedureMetrics,
+                'tip' => $tip,
             ]);
 
         }
@@ -62,6 +67,7 @@ class VerificationsController extends Controller
                 "selectedAssignment" => $selectedAssignment,
                 'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
                 'procedureMetrics' => $this->procedureMetrics,
+                'tip' => $tip,
             ]);
         }
         else {
@@ -69,6 +75,7 @@ class VerificationsController extends Controller
                 "assignments" => $assignments,
                 'vulnerabilityMetrics' => $this->vulnerabilityMetrics,
                 'procedureMetrics' => $this->procedureMetrics,
+                'tip' => $tip,
             ]);
         }
     }
