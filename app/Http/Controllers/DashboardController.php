@@ -26,6 +26,9 @@ class DashboardController extends Controller
         $monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
         $userInfo = Auth::user();
+        
+        //collection of users badges
+        $userBadges = $userInfo->badges;
 
         $activeReports = Auth::user()->activeReports->load('program');
 
@@ -108,7 +111,8 @@ class DashboardController extends Controller
             'activeReports' => $activeReports,
             'activeVerifications' => $activeVerifications,
             'leaderboard' => $leaderboard,
-            'chart' => $chart
+            'chart' => $chart,
+            'userBadges' => $userBadges,
         ]);
     }
 }
