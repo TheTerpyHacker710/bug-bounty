@@ -38,6 +38,7 @@
 import HomeNavLayout from "../Layouts/HomeNavLayout"
 
     export default {
+
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
@@ -63,7 +64,7 @@ import HomeNavLayout from "../Layouts/HomeNavLayout"
                 else {
                     return true;
                 }
-            }
+            },
         },
     }
 </script>

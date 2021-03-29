@@ -10,6 +10,7 @@ use Auth;
 class ProgramsController extends Controller
 {
     public function index() {
+        // Add Pagination !!!!!
         $programs = Program::select('id', 'Title', 'Excerpt')->get();
 
         if(Auth::user()){
