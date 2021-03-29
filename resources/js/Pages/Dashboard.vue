@@ -19,7 +19,7 @@
                     </span>
 
                     <span class="bg-white col-span-2 shadow-xl rounded-lg">
-                        <awards :userInfo="userInfo"/>
+                        <awards :userInfo="userInfo" :userBadges="userBadges"/>
                     </span>
 
                 </div>
@@ -36,7 +36,7 @@
     import Awards from '@/Pages/Dashboard/Awards'
 
     export default {
-        props: ['userInfo', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
+        props: ['userInfo', 'userBadges', 'activeReports', 'activeVerifications', 'leaderboard', 'chart'],
 
         components: {
             AppLayout,
