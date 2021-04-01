@@ -92,10 +92,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', functio
     return Inertia::render('Admin/Dashboard');
 })->name('adminDashboard');
 
-//Route::middleware(['auth:sanctum', 'verified'])->get('/admin/reports', function () {
-//    return Inertia::render('Admin/Reports');
-//})->name('Reports');
-
 Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
     ->name('Reports')
     ->middleware('auth');

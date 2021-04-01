@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//use App\User;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -43,22 +42,24 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'name' => 'required|min:5',
+           'name' => 'required',
            'email' => 'required|email|unique:users',
            'password' => 'required|min:8',
-            'username' => 'required|min:5',
+            'username' => 'required|min:4|unique:users',
             'org_id' => 'required',
+            'org_name' => 'required'
         ]);
 
         User::create([
-           'name' => $request->name,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'username' => $request->username,
-            'org_id' => $request->org_id
+            'org_id' => $request->org_id,
+            'org_name' => $request->org_name
         ]);
 
-        return redirect()->route('users.index')->with('successMessage', 'User was successfully added');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -95,20 +96,22 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-           'name' => 'required',
-           'email' => 'required|unique:users,email,'.$user->id,
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$user->id,
             'username' => 'required',
             'org_id' => 'required',
+            'org_name' => 'required',
         ]);
 
         $user->update([
            'name' => $request->name,
            'email' => $request->email,
             'username' => $request->username,
-            'org_id' => $request->org_id
+            'org_id' => $request->org_id,
+            'org_name' => $request->org_name
         ]);
 
-        return redirect()->route('users.index')->with('successMessage', 'User was successfully updated');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -121,6 +124,6 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')->with('successMessage', 'User was successfully deleted');
+        return redirect()->route('users.index');
     }
 }
