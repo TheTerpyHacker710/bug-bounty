@@ -33,6 +33,18 @@ class ProgramsController extends Controller
 
     public function show($program_id) {
         $program = Program::find($program_id);
+
+        if(Auth::user()){
+            $activeReports = Auth::user()->activeReports->load('program');
+
+            return Inertia::render('Program', [
+                'canLogin' => Route::has('login'),
+                'canRegister' => Route::has('register'),
+                'program' => $program,
+                'activeReports' => $activeReports,
+            ]);
+        }
+
         return Inertia::render('Program', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
