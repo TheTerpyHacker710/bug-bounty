@@ -36,9 +36,17 @@ class ActiveReportsController extends Controller
    public function store(Request $request) {
         //store a new active report
         $activeReport = new activeReports;
-        $activeReport->user_id = $request->user_id;
-        $activeReport->program_id = $request->program_id;
+        $activeReport->user_id = (int)(request()->validate([
+                                        'user_id' => 'integer'
+                                   ])['user_id']);
+        $activeReport->program_id = (int)(request()->validate([
+                                        'program_id' => 'integer'
+                                   ])['program_id']);
         $activeReport->save();
+
+        if($request->origin) {
+             return redirect('/program/'.$activeReport->program_id);
+        }
 
         return redirect('/');
    }

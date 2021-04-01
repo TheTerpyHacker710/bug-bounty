@@ -36,14 +36,14 @@ Route::get('/about', function () {
 })->name('About');
 
 Route::get('/contact', function () {
-    return Inertia::render('About', [
+    return Inertia::render('Contact', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
 })->name('Contact');
 
 Route::get('/help', function () {
-    return Inertia::render('About', [
+    return Inertia::render('Help', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
