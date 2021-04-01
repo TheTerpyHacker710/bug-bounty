@@ -37,6 +37,11 @@
                             <input type="text" class="form-control" id="org_id" placeholder="org_id" v-model="form.org_id">
                             <div v-if="errors.org_id">{{ errors.org_id }}</div>
                         </div>
+                        <div class="form-group">
+                            <jet-label for="org_id">Organisation Name</jet-label>
+                            <input type="text" class="form-control" id="org_name" placeholder="org_name" v-model="form.org_name">
+                            <div v-if="errors.org_name">{{ errors.org_name }}</div>
+                        </div>
 
                         <jet-button type="submit" class="btn btn-primary">Update User</jet-button>
                      </form>
@@ -72,6 +77,7 @@ export default {
                 email: this.user.email,
                 username: this.user.username,
                 org_id: this.user.org_id,
+                org_name: this.user.org_name,
             }
         }
     },
