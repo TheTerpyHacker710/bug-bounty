@@ -8,10 +8,6 @@
             </h2>
         </template>
 
-        <div v-if="successMessage" class="alert alert-success mt-4">
-            {{ successMessage }}
-        </div>
-
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="my-5">
                 <jet-button><a href="/admin/users/create" class="btn btn-primary">Create User</a></jet-button>
@@ -24,13 +20,14 @@
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
-
                                 <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Organisation ID</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Organisation Name</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor</th>
                                     <th scope="col" class="relative px-6 py-3">Actions</th>
                                 </tr>
                                 </thead>
@@ -41,20 +38,19 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ user.username }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ user.org_id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.org_name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ user.isVendor }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900">
                                     <inertia-link :href="`/admin/users/${user.id}/edit`">Edit</inertia-link>
                                     </td>
                                 </tr>
                                 </tbody>
-
                             </table>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </admin-layout>
 </template>
 
@@ -64,7 +60,7 @@ import AdminLayout from "../../../Layouts/AdminLayout";
 import JetButton from '@/Jetstream/Button'
 
 export default {
-    props: ['users', 'successMessage'],
+    props: ['users'],
 
     components: {
         AdminLayout,

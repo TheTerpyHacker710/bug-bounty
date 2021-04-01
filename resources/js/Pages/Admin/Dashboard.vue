@@ -7,9 +7,7 @@
             </h2>
         </template>
 
-        <div class="grid grid-cols-2 gap-4 px-1 py-1 h-auto text-center py-2">
-            <h2>Active Reports</h2>
-
+        <div class="grid grid-cols-1 gap-4 px-1 py-1 h-auto text-center py-2">
             <h2>Vendor Appeals</h2>
         </div>
     </admin-layout>
@@ -18,7 +16,7 @@
 <script>
     import Welcome from '@/Jetstream/Welcome'
     import AdminLayout from "../../Layouts/AdminLayout";
-    import ActiveJobs from "../Dashboard/ActiveJobs";
+    import AdminActiveJobs from "../Admin/AdminActiveJobs";
 
     export default {
 
@@ -27,7 +25,7 @@
         components: {
             AdminLayout,
             Welcome,
-            ActiveJobs
+            AdminActiveJobs
         },
     }
 </script>

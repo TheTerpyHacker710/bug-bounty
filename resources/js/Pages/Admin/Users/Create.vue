@@ -42,6 +42,12 @@
                                    placeholder="org_id" v-model="form.org_id">
                             <div v-if="errors.org_id">{{ errors.org_id }}</div>
                         </div>
+                        <div class="form-group">
+                            <jet-label for="org_name">Organisation Name</jet-label>
+                            <input type="text" class="form-control" id="org_name"
+                                   placeholder="org_name" v-model="form.org_name">
+                            <div v-if="errors.org_name">{{ errors.org_name }}</div>
+                        </div>
                         <jet-button type="submit" class="btn btn-primary">Create User</jet-button>
                     </form>
                 </div>
@@ -73,6 +79,7 @@ export default {
                 email: '',
                 password: '',
                 org_id: '',
+                org_name: '',
             }
         }
         },

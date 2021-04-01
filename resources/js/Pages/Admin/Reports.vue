@@ -10,9 +10,6 @@
 
         <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    Reports
-                </div>
                 <span class="bg-white col-span-4 shadow-xl">
                     <admin-active-jobs :activeReports="activeReports" :activeVerifications="activeVerifications"/>
                 </span>
