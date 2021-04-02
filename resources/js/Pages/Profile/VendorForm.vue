@@ -90,7 +90,7 @@
             },
 
             sendApplication() {
-                //nothing
+                this.$inertia.get(route('vendorApply'));
             }
 
         }

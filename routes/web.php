@@ -87,6 +87,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
 
 Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
+Route::get('vendor-apply', ['App\Http\Controllers\VendorController', 'vendorApply'])->name('vendorApply');
 
 //Admin Links
 

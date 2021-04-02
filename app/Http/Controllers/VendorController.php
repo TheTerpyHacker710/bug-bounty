@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Program;
 use Auth;
 use Inertia\Inertia;
+use App\Models\VendorRequest;
 
 class VendorController extends Controller
 {
@@ -15,14 +16,19 @@ class VendorController extends Controller
    }
 
    public function vendorApply(){
-
+        
        if(Auth::user()->isVendor == 0){
-          
-            $input= $request->toArray();
+
             $id = Auth::user()->id;
 
-            
-       }
+             $tag = VendorRequest::firstOrCreate([                     
+                'user_id' => $id,
+                'approved' => '0'
+                ]);
+
+             return redirect()->route('dashboard');
+        }   
+       //else do nothing
        
    }
 
