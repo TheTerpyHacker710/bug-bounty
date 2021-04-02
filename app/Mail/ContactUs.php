@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactVendor extends Mailable
+class ContactUs extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class ContactVendor extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Message from' + $name)->from($email)->view('emails.contact-vendor-email');
+        return $this->subject('New Message from ' . $this->name)->from($this->email)->view('emails.contact-vendor-email');
     }
 }

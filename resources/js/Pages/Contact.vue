@@ -13,32 +13,28 @@
                         <p> &lt;- Home</p>
                     </inertia-link>
                 </div>
-                <div v-if="errors.length">
-                    <div class="flex flex-col w-full">
-                        <ul>
-                            <li v-for="error in errors" :key="error" class="border border-red-400 bg-red-300 text-white p-2 rounded-lg my-2">{{ error }}</li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="border rounded py-2 my-2 flex">
                     <div class="flex flex-col w-3/5 justify-start">
-                        <form @submit.prevent="checkForm" novalidate="true">
+                        <form @submit.prevent="form.post('/contact/sendmail', {preserveScroll: true, onSuccess: () => form.reset(),})" novalidate="true">
                             <div class="flex flex-col">
                                 <div class="flex flex-col justify-start py-4 px-2">
                                     <label class="text-md text-gray-700 uppercase font-bold" for="name">Full name:</label>
-                                    <input type="text" name="name" v-model="StaticFormData.name" placeholder="Enter your name..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <input type="text" name="name" v-model="form.name" placeholder="Enter your name..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <div v-if="form.errors.name" class="text-red-600">Name is required</div>
                                 </div>
                                 <div class="flex flex-col justify-start py-4 px-2">
                                     <label class="text-md text-gray-700 uppercase font-bold" for="email">Email:</label>
-                                    <input type="email" name="email" v-model="StaticFormData.email" placeholder="Enter your email..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <input type="email" name="email" v-model="form.email" placeholder="Enter your email..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <div v-if="form.errors.email" class="text-red-600">Email is required</div>
                                 </div>
                                 <div class="flex flex-col justify-start py-4 px-2">
                                     <label class="text-md text-gray-700 uppercase font-bold" for="message">Message:</label>
-                                    <textarea name="message" v-model="StaticFormData.message" placeholder="Enter your message..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                                    <textarea name="message" v-model="form.message" placeholder="Enter your message..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                                    <div v-if="form.errors.message" class="text-red-600">Message is required</div>
                                 </div>
                             </div>
                             <div class="flex justify-end px-4">
-                                <button type="submit" class="no-underline text-center text-sm px-4 py-2 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
+                                <button type="submit" :disabled="form.processing" class="no-underline text-center text-sm px-4 py-2 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
                                     Submit
                                 </button>
                             </div>
@@ -58,57 +54,27 @@
 <script>
 
 import HomeNavLayout from "../Layouts/HomeNavLayout"
+import { useForm } from '@inertiajs/inertia-vue3'
 
     export default {
 
         props: {
             'canLogin': Boolean,
             'canRegister': Boolean,
+            'successfulSend': Boolean,
         },
-
-        data() {
-            return {
-                errors: [],
-                StaticFormData: {
-                    name: "",
-                    email: "",
-                    message: "",
-                }
-            }
+        
+        setup() {
+            const form = useForm({
+                name: null,
+                email: null,
+                message: null,
+            })
+            return { form }
         },
         
         components: {
             HomeNavLayout,
         },
-
-        methods: {
-            checkForm: function(e) {
-                this.errors = [];
-
-                if(!this.StaticFormData.name) {
-                    this.errors.push("Name is required");
-                }
-                if(!this.StaticFormData.email) {
-                    this.errors.push("Email is required");
-                }
-                else if(!this.validEmail(this.StaticFormData.email)) {
-                    this.errors.push('Valid email required')
-                }
-                if(!this.StaticFormData.message) {
-                    this.errors.push("Message is required");
-                }
-
-                if(!this.errors.length) {
-                    this.$inertia.post(route('SendMail'), this.StaticFormData);
-                }
-
-                e.preventDefault();
-            },
-
-            validEmail: function (email) {
-                var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(email);
-            }
-        }
     }
 </script>
