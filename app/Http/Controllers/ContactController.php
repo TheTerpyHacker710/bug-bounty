@@ -18,8 +18,8 @@ class ContactController extends Controller
             'email' => 'required|string|min:10|max:125',
             'message' => 'required|string|max:1000',
         ]);
-        
-        Mail::to('gdeacon99@localhost')->send(new ContactUs($validatedData['name'], $validatedData['message'], $validatedData['email']));
+
+        Mail::to('gdeacon99@localhost')->send(new ContactUs($validatedData));
 
         return Redirect::route('Contact');
     }
