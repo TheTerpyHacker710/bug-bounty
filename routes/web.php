@@ -12,6 +12,7 @@ use App\Models\activeReports;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [ProgramsController::class, 'index'])->name('home');
 Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram');
 Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
+Route::post('/contact/sendmail', [ContactController::class, 'send'])->name('SendMail');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
