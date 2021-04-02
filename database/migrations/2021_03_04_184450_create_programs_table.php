@@ -18,7 +18,7 @@ class CreateProgramsTable extends Migration
             $table->string('Title');
             $table->text('Description');
             $table->string('Excerpt');
-            $table->text('Vendor Contact');
+            $table->foreignId('VendorID')->references('id')->on('users');
             $table->boolean('Exclusive');
             $table->boolean('Vendor Approval');
             $table->timestamps();

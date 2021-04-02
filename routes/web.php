@@ -4,6 +4,7 @@ use App\Http\Controllers\ActiveReportsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\VerificationsController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,8 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [ProgramsController::class, 'index'])->name('home');
-Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram');
+Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram');
+Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -34,14 +36,14 @@ Route::get('/about', function () {
 })->name('About');
 
 Route::get('/contact', function () {
-    return Inertia::render('About', [
+    return Inertia::render('Contact', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
 })->name('Contact');
 
 Route::get('/help', function () {
-    return Inertia::render('About', [
+    return Inertia::render('Help', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
@@ -83,6 +85,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
 
 Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
+Route::get('vendor-apply', ['App\Http\Controllers\VendorController', 'vendorApply'])->name('vendorApply');
 
 //Admin Links
 

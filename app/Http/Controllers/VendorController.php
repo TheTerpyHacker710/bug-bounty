@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Programs;
+use App\Models\Program;
 use Auth;
 use Inertia\Inertia;
+use App\Models\VendorRequest;
 
 class VendorController extends Controller
 {
@@ -15,21 +16,26 @@ class VendorController extends Controller
    }
 
    public function vendorApply(){
-
+        
        if(Auth::user()->isVendor == 0){
-          
-            $input= $request->toArray();
+
             $id = Auth::user()->id;
 
-            
-       }
+             $tag = VendorRequest::firstOrCreate([                     
+                'user_id' => $id,
+                'approved' => '0'
+                ]);
+
+             return redirect()->route('dashboard');
+        }   
+       //else do nothing
        
    }
 
    public static function vendorDashboard(){
 
         if(Auth::user()->isVendor == 1){
-             $vendorPrograms = Programs::where('vendorID', Auth::user()->id)->get()->toArray();
+             $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get()->toArray();
 
             return Inertia::render('Vendor', [
                     'programs' =>  $vendorPrograms,
@@ -48,7 +54,7 @@ class VendorController extends Controller
         $id = Auth::user()->id;
         
 
-        Programs::where([
+        Program::where([
             'vendorID' => $id,
             'id' => $input['id']
             ])->delete();

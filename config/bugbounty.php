@@ -11,10 +11,11 @@ use App\Services\UserMetrics\ActivityScore;
 use App\Services\UserMetrics\Competence;
 use App\Services\UserMetrics\HitRate;
 use App\Services\VerificationAssigners\AnotherVerificationAssigner;
+use App\Services\VerificationAssigners\BasicVerificationAssigner;
 use App\Services\VerificationEvaluators\BasicVerificationEvaluator;
 
 return [
-    'verificationAssigner' => AnotherVerificationAssigner::class,
+    'verificationAssigner' => BasicVerificationAssigner::class,
     'verificationEvaluator' => BasicVerificationEvaluator::class,
     'difficultyCalculator' => BasicDifficultyCalculator::class,
     'userMetrics' => [

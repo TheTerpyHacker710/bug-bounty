@@ -28,6 +28,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'reputation' => $this->faker->numberBetween(1, 10000),
+            'username' => $this->faker->unique()->userName,
+            'org_id' => $this->faker->numberBetween(1, 10000000),
+            'isVendor' => false,
+            'isAdmin' => false,
+            'org_name' => 'Abertay University'
         ];
     }
 

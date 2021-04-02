@@ -38,7 +38,7 @@ class DashboardController extends Controller
         ->orderBy('created_at')
         ->get();
 
-        $submittedVerifications = VerificationSubmission::select('id')
+        $submittedVerifications = VerificationSubmission::select('id', 'created_at')
         ->whereHas('verificationAssignment', function($query) {
             $query->where('assignee_id', Auth::id());
         })
@@ -48,7 +48,7 @@ class DashboardController extends Controller
             return Carbon::parse($date->created_at)->format('m');
         });
 
-        $submittedReports = Report::select('id')
+        $submittedReports = Report::select('id', 'created_at')
         ->where('creator_id', Auth::id())
         ->whereYear('created_at', date('Y'))
         ->get()
