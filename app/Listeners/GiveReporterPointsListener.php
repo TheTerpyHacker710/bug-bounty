@@ -19,8 +19,9 @@ class GiveReporterPointsListener implements ShouldQue
      */
     public function handle(VerificationBatchCompleted $event)
     {
-        $user_id = $event->verificationBatch->report->creator_id;
-        $user_id = addPoint($points = 1000);
+        
+        $user_id = $event->VerificationBatch->report->creator_id;
+        $user_id->addPoint($points = 1000);
 
     }
 }
