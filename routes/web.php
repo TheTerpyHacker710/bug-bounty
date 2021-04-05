@@ -94,8 +94,7 @@ Route::middleware('can:accessVendor')->group(function(){
 
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->post(
-    'vendor-apply', [VendorController::class, 'vendorApply']);
+Route::get('/vendor-apply', [VendorController::class, 'vendorApply'])->name('vendorApply');
 
 
 //Admin Links
