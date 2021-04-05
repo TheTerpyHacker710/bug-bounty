@@ -78,19 +78,25 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
     '/cancelVerification', [VerificationsController::class, 'cancel']
 );
 
-Route::middleware(['auth:sanctum', 'verified'])->get(
-    '/vendor', [VendorController::class, 'vendorDashboard']
-)->name('Vendor');
+Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 
-Route::middleware(['auth:sanctum', 'verified'])->post(
+//Vendor Routes
+Route::middleware('can:accessVendor')->group(function(){
+
+    Route::middleware(['auth:sanctum', 'verified'])->get(
+        '/vendor', [VendorController::class, 'vendorDashboard']
+    )->name('Vendor');
+
+    Route::middleware(['auth:sanctum', 'verified'])->post(
     '/program-delete', [VendorController::class, 'programDelete']);
+
+    Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
+
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->post(
     'vendor-apply', [VendorController::class, 'vendorApply']);
 
-Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
-Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
-Route::get('vendor-apply', ['App\Http\Controllers\VendorController', 'vendorApply'])->name('vendorApply');
 
 //Admin Links
 
