@@ -29,6 +29,7 @@ Route::get('/', [ProgramsController::class, 'index'])->name('home');
 Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram');
 Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
 Route::post('/contact/sendmail', [ContactController::class, 'send'])->name('SendMail');
+Route::post('/contact/sendmailvendor', [ContactController::class, 'sendVendor'])->name('SendMail');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -43,6 +44,8 @@ Route::get('/contact', function () {
         'canRegister' => Route::has('register'),
     ]);
 })->name('Contact');
+
+Route::get('/contact-vendor', [ContactController::class, 'indexVendor'])->name('ContactVendor');
 
 Route::get('/help', function () {
     return Inertia::render('Help', [
