@@ -12,6 +12,7 @@ use App\Models\activeReports;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [ProgramsController::class, 'index'])->name('home');
 Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram');
 Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
+Route::post('/contact/sendmail', [ContactController::class, 'send'])->name('SendMail');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -89,18 +91,22 @@ Route::get('vendor-apply', ['App\Http\Controllers\VendorController', 'vendorAppl
 
 //Admin Links
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
-})->name('adminDashboard');
+RRoute::middleware('can:accessAdmin')->group(function(){
+    
+    Route::get('/admin/dashboard', function () {
+        return Inertia::render('Admin/Dashboard');
+    })->name('adminDashboard');
 
-Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
-    ->name('Reports')
-    ->middleware('auth');
+    Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
+        ->name('Reports')
+        ->middleware('auth');
 
-Route::get('/admin/users', 'App\Http\Controllers\UsersController@index')->name('users.index');
-Route::get('/admin/users/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
-Route::post('/admin/users', 'App\Http\Controllers\UsersController@store')->name('users.store');
+    Route::get('/admin/users', 'App\Http\Controllers\UsersController@index')->name('users.index');
+    Route::get('/admin/users/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
+    Route::post('/admin/users', 'App\Http\Controllers\UsersController@store')->name('users.store');
 
-Route::get('/admin/users/{user}/edit', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
-Route::patch('/admin/users/{user}', 'App\Http\Controllers\UsersController@update')->name('users.update');
-Route::delete('/admin/users/{user}', 'App\Http\Controllers\UsersController@destroy')->name('users.destroy');
+    Route::get('/admin/users/{user}/edit', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
+    Route::patch('/admin/users/{user}', 'App\Http\Controllers\UsersController@update')->name('users.update');
+    Route::delete('/admin/users/{user}', 'App\Http\Controllers\UsersController@destroy')->name('users.destroy');
+
+});
