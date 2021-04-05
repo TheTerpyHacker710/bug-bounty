@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="flex flex-col justify-start py-4 px-2">
                                     <label class="text-md text-gray-700 uppercase font-bold" for="message">Message:</label>
-                                    <textarea name="message" v-model="form.message" placeholder="Enter your message..." class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                                    <textarea name="message" v-model="form.message" placeholder="Enter your message..." class="shadow appearance-none border rounded w-full h-32 md:h-64 py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                                     <div v-if="form.errors.message" class="text-red-600">Message is required</div>
                                 </div>
                             </div>
@@ -61,7 +61,6 @@ import { useForm } from '@inertiajs/inertia-vue3'
         props: {
             'canLogin': Boolean,
             'canRegister': Boolean,
-            'successfulSend': Boolean,
         },
         
         setup() {

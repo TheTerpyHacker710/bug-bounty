@@ -22,7 +22,7 @@
                                 View
                             </inertia-link>
 
-                            <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                            <inertia-link :href="route('ContactVendor')" class="no-underline text-center text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                                 Contact
                             </inertia-link>
                         </div>

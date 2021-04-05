@@ -11,20 +11,16 @@ class ContactVendor extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $vendor;
-    public $user;
-    public $message;
+    public $validData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($vendor, $user, $message)
+    public function __construct($validData)
     {
-        $this->vendor = $vendor;
-        $this->user = $user;
-        $this->message = $message;
+        $this->validData = $validData;
     }
 
     /**
@@ -34,6 +30,6 @@ class ContactVendor extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Message')->view('emails.contact-vendor-email');
+        return $this->subject('New Message from ' . $this->validData['name'])->from($this->validData['email'])->view('emails.contact-vendor-email');
     }
 }
