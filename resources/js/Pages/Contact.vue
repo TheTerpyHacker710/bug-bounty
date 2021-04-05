@@ -43,7 +43,7 @@
                     <div class="w-2/5 flex flex-col justify-center p-4">
                         <p class="py-8 text-gray-500">Please fill in the form on the left to contact one of the admin team. </p>
                         <p class="py-8 text-gray-500">Once the admin team has seen your message they will be in touch within 5 working days.</p>
-                        <p class="py-8 text-gray-500">If you want to contact a vendor please browse here</p> <!-- add in function for vendor contact -->
+                        <p class="py-8 text-gray-500">If you would like to contact a vendor please <inertia-link :href="route('ContactVendor')" class="no-underline hover:underline text-blue-500 hover:text-blue-600">click here</inertia-link></p> <!-- add in function for vendor contact -->
                     </div>
                 </div>
             </div>

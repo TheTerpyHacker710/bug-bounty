@@ -20,7 +20,7 @@
                                 <div class="flex flex-col justify-start py-4 px-2">
                                     <label class="text-md text-gray-700 uppercase font-bold" for="vendor">Vendor:</label>
                                     <select name="vendor" v-model="form.vendor" class="shadow appearance-none border rounded w-full py-2 mb-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                                        <option :value="null" disabled hidden selected>Please select one</option>
+                                        <option :value="null" hidden disabled selected>Please select one</option>
                                         <option :key="program.id" v-for="program in programs" :value="program.user.email">{{program.Title}}</option>
                                     </select>
                                     <div v-if="form.errors.vendor" class="text-red-600">Vendor is required</div>
@@ -58,7 +58,7 @@
                     <div class="w-2/5 flex flex-col justify-center p-4">
                         <p class="py-8 text-gray-500">Please fill in the form on the left to contact the vendor of the selected program. </p>
                         <p class="py-8 text-gray-500">Once the Vendor has seen your message they will be in touch as soon as they can.</p>
-                        <p class="py-8 text-gray-500">If you want to contact the site admins, click here</p> <!-- add in function for admin contact -->
+                        <p class="py-8 text-gray-500">If you want to contact the site admins, please, <inertia-link :href="route('Contact')" class="no-underline hover:underline text-blue-500 hover:text-blue-600">click here</inertia-link></p>
                     </div>
                 </div>
             </div>
@@ -92,6 +92,10 @@ import { useForm } from '@inertiajs/inertia-vue3'
         
         components: {
             HomeNavLayout,
+        },
+
+        methods: {
+
         },
     }
 </script>
