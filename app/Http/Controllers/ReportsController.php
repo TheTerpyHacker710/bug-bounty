@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ReportSubmitted;
 use App\Jobs\AssignVerifiers;
 use App\Models\Program;
+use App\Models\activeReports;
 use App\Models\Tip;
 use App\Services\ReportMetrics\ReportMetric;
 use App\Services\ReportMetrics\VulnerabilityMetric;
@@ -59,6 +60,8 @@ class ReportsController extends Controller
 
         // dispatch verification assignment job
         AssignVerifiers::dispatch($report);
+
+        activeReports::where('program_id', $validatedData['program_id'])->where('user_id', Auth::id())->delete();
 
         return Redirect::route('dashboard');
     }

@@ -100,7 +100,7 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
 
 //Admin Links
 
-RRoute::middleware('can:accessAdmin')->group(function(){
+Route::middleware('can:accessAdmin')->group(function(){
     
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
