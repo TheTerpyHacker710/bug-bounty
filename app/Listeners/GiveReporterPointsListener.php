@@ -3,18 +3,17 @@
 namespace App\Listeners;
 
 use App\Events\VerificationBatchCompleted;
-use App\Model\Report;
 use App\Model\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class GiveReporterPointsListener implements ShouldQue
+class GiveReporterPointsListener 
 {
 
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  VerificationBatchCompleted  $event
      * @return void
      */
     public function handle(VerificationBatchCompleted $event)
