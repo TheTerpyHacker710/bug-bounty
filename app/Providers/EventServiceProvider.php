@@ -23,6 +23,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+         VerificationBatchCompleted::class => [
+            GiveReporterPoints::class,
+            GiveVerifierPoints::class,
+        ],
     ];
 
     protected $subscribe = [
