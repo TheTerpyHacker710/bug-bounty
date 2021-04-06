@@ -14,10 +14,10 @@ class GiveVerifierPointsListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  VerficationBatchCompleted  $event
      * @return void
      */
-    public function handle(VerficationBatchComplete $event)
+    public function handle(VerficationBatchCompleted $event)
     {
         foreach ($event->VerificationBatch->VerficationAssignment->assignee_id as $user_id)
         {
