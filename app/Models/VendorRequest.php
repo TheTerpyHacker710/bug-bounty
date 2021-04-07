@@ -11,9 +11,4 @@ class VendorRequest extends Model
 
      protected $fillable = ['user_id', 'approved'];
 
-     public function approve() {
-        $this->update([
-            'approved' => '1', 
-        ]);
-    }
 }

@@ -108,6 +108,8 @@ Route::middleware('can:accessAdmin')->group(function(){
     Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
         ->name('Reports')
         ->middleware('auth');
+    
+    Route::post('/approve', [VendorController::class, 'vendorApprove'])->name('approve');
 
     Route::get('/admin/users', 'App\Http\Controllers\UsersController@index')->name('users.index');
     Route::get('/admin/users/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
