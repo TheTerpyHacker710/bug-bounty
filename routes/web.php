@@ -29,6 +29,7 @@ Route::get('/', [ProgramsController::class, 'index'])->name('home');
 Route::get('/program/{id}', [ProgramsController::class, 'show'])->name('ViewProgram');
 Route::post('/', [ActiveReportsController::class, 'store'])->name('JoinProgram')->middleware('auth');
 Route::post('/contact/sendmail', [ContactController::class, 'send'])->name('SendMail');
+Route::post('/contact/sendmailvendor', [ContactController::class, 'sendVendor'])->name('SendMail');
 
 Route::get('/about', function () {
     return Inertia::render('About', [
@@ -43,6 +44,8 @@ Route::get('/contact', function () {
         'canRegister' => Route::has('register'),
     ]);
 })->name('Contact');
+
+Route::get('/contact-vendor', [ContactController::class, 'indexVendor'])->name('ContactVendor');
 
 Route::get('/help', function () {
     return Inertia::render('Help', [
@@ -75,23 +78,28 @@ Route::middleware(['auth:sanctum', 'verified'])->post(
     '/cancelVerification', [VerificationsController::class, 'cancel']
 );
 
-Route::middleware(['auth:sanctum', 'verified'])->get(
-    '/vendor', [VendorController::class, 'vendorDashboard']
-)->name('Vendor');
+Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
 
-Route::middleware(['auth:sanctum', 'verified'])->post(
+//Vendor Routes
+Route::middleware('can:accessVendor')->group(function(){
+
+    Route::middleware(['auth:sanctum', 'verified'])->get(
+        '/vendor', [VendorController::class, 'vendorDashboard']
+    )->name('Vendor');
+
+    Route::middleware(['auth:sanctum', 'verified'])->post(
     '/program-delete', [VendorController::class, 'programDelete']);
 
-Route::middleware(['auth:sanctum', 'verified'])->post(
-    'vendor-apply', [VendorController::class, 'vendorApply']);
+    Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
-Route::put('/update-skill', ['App\Http\Controllers\SkillController', 'update']);
-Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
-Route::get('vendor-apply', ['App\Http\Controllers\VendorController', 'vendorApply'])->name('vendorApply');
+});
+
+Route::get('/vendor-apply', [VendorController::class, 'vendorApply'])->name('vendorApply');
+
 
 //Admin Links
 
-RRoute::middleware('can:accessAdmin')->group(function(){
+Route::middleware('can:accessAdmin')->group(function(){
     
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');

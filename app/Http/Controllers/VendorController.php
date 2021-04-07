@@ -34,16 +34,12 @@ class VendorController extends Controller
 
    public static function vendorDashboard(){
 
-        if(Auth::user()->isVendor == 1){
-             $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get()->toArray();
+     
+        $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get()->toArray();
 
-            return Inertia::render('Vendor', [
-                    'programs' =>  $vendorPrograms,
-                ]);
-       
-        }else{
-            return abort(403);
-        }
+        return Inertia::render('Vendor', [
+                'programs' =>  $vendorPrograms,
+            ]);
         //Get all programs where program creator ID = current user ID
        
     }

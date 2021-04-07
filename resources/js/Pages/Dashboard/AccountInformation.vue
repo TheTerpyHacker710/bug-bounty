@@ -1,5 +1,5 @@
 <template>
-    <h2 class="text-center">Account Information</h2>
+    <h2 class="text-center text-lg">Account Information</h2>
         <ul>
             <li class="py-2"><b>Name:</b> {{userInfo.name}}</li>
             <li class="py-2"><b>Username:</b> {{userInfo.username}}</li>
