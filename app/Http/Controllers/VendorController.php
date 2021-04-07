@@ -11,8 +11,16 @@ use App\Models\VendorRequest;
 class VendorController extends Controller
 {
 
-   public function vendorRequests() {
-        //display all vendor requests (for admin)
+   public function vendorRequests(request $request) {
+       
+        $request->validate([
+           'user_id' => 'required',
+        ]);
+
+        VendorRequest::where('user_id', $request->user_id)->update(['approved' => 1]);
+        User::where('id', $request->user_id)->update(['isVendor' => 1]);
+
+        return Redirect::route('adminDashboard');
    }
 
    public function vendorApply(){
