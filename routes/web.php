@@ -89,6 +89,9 @@ Route::middleware('can:accessVendor')->group(function(){
 
     Route::middleware(['auth:sanctum', 'verified'])->post(
     '/program-delete', [VendorController::class, 'programDelete']);
+    
+    Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/program-update', [VendorController::class, 'programUpdate']);
 
     Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
