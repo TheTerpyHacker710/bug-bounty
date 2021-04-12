@@ -107,6 +107,10 @@ Route::middleware('can:accessAdmin')->group(function(){
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('adminDashboard');
+    
+    Route::get('/admin/dashboard', [VendorController::class, 'vendorRequests'])
+    ->name('adminDashboard')
+    ->middleware('auth');
 
     Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
         ->name('Reports')
