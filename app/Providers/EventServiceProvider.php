@@ -28,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         VerificationBatchCompleted::class => [
             GiveReporterPointsListener::class,
-            //GiveVerifierPointsListener::class,
+            GiveVerifierPointsListener::class,
         ],
     ];
 
