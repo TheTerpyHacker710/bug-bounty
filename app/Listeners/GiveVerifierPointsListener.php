@@ -19,9 +19,6 @@ class GiveVerifierPointsListener
      */
     public function handle(VerficationBatchCompleted $event)
     {
-        foreach ($event->VerificationBatch->VerficationAssignment->assignee_id as $user_id)
-        {
-            $user_id->addPoint($point = 100);
-        }
+        $event->verificationBatch->verificationAssignments->each(fn($a) => $a->assignee->addPoint($points = 100));
     }
 }
