@@ -6,11 +6,13 @@
             </h2>
         </template>
 
-        <add-form/>
+        <reports-form :reports="$page.props.reports" />
 
-        <delete-form :programs="$page.props.programs"/>
+        <add-form />
 
-</app-layout>
+        <program-form :programs="$page.props.programs" />
+
+    </app-layout>
 </template>
 
 <script>import AppLayout from '@/Layouts/AppLayout'
@@ -22,7 +24,8 @@
     import JetActionMessage from '@/Jetstream/ActionMessage'
     import JetSectionBorder from '@/Jetstream/SectionBorder'
     import AddForm from './Vendor/AddForm'
-    import DeleteForm from './Vendor/DeleteForm'
+    import ProgramForm from './Vendor/ProgramForm'
+    import ReportsForm from './Vendor/ReportsForm'
 
     export default {
 
@@ -30,7 +33,8 @@
             AppLayout,
             Welcome,
             AddForm,
-            DeleteForm,
+            ProgramForm,
+            ReportsForm,
 
         },
 

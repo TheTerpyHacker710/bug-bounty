@@ -7,12 +7,23 @@ use App\Models\Program;
 use Auth;
 use Inertia\Inertia;
 use App\Models\VendorRequest;
+use App\Models\User;
+use Redirect;
 
 class VendorController extends Controller
 {
 
    public function vendorRequests(request $request) {
        
+        $data = VendorRequest::all();
+
+       return Inertia::render('Admin/Dashboard', [
+           'vendor_requests' => $data,
+       ]);
+   }
+    
+   public function vendorApprove(request $request){
+
         $request->validate([
            'user_id' => 'required',
         ]);
@@ -21,7 +32,9 @@ class VendorController extends Controller
         User::where('id', $request->user_id)->update(['isVendor' => 1]);
 
         return Redirect::route('adminDashboard');
+
    }
+
 
    public function vendorApply(){
         
@@ -42,13 +55,25 @@ class VendorController extends Controller
 
    public static function vendorDashboard(){
 
-     
-        $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get()->toArray();
+        $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get();
+        $vendorReports = array();
 
+        //Get all reports for every program that belongs to the current logged in vendor
+        foreach($vendorPrograms as $program){
+
+            $programReports = $program->reports()->get();
+
+            foreach($programReports as $programReport){
+                array_push($vendorReports, $programReport);
+            }        
+        }
+
+        $reports = array_reverse($vendorReports);
+        
         return Inertia::render('Vendor', [
                 'programs' =>  $vendorPrograms,
+                'reports' => $reports,
             ]);
-        //Get all programs where program creator ID = current user ID
        
     }
 
@@ -64,6 +89,20 @@ class VendorController extends Controller
             ])->delete();
 
         return redirect()->route('Vendor');
+    }
+    
+    public function programUpdate(Request $request){
+
+         $request->validate([
+            'id' => 'required',
+           'title' => 'required',
+           'descr' => 'required',
+        ]);
+
+        Program::where('id', $request->id)->update(['Title' => $request->title, 'Description' => $request->descr]);
+
+        return Redirect::route('Vendor');
+
     }
 
 
