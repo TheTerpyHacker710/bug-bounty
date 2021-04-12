@@ -3,9 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\VerificationBatchCompleted;
-use App\Model\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Models\User;
 
 class GiveReporterPointsListener 
 {
@@ -18,7 +16,7 @@ class GiveReporterPointsListener
      */
     public function handle(VerificationBatchCompleted $event)
     {
-       $user_id = $event->verificationBatch->report->creator_id;
+        $user_id = $event->verificationBatch->report->creator_id;
         $user = User::find($user_id);
         $user->addPoint($points = 1000);
     }

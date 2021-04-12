@@ -10,7 +10,7 @@ class VerificationSubmission extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    //protected $guarded = [];
 
     protected $casts = [
         'procedure_metrics' => AsArrayObject::class,

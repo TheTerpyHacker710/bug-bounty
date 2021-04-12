@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\VerificationBatchCompleted;
 use App\Events\VerificationSubmitted;
 use App\Jobs\AddVerifer;
 use App\Jobs\EvaluateVerifications;
 use App\Models\Tip;
-use App\Models\User;
 use App\Models\VerificationAssignment;
 use App\Models\VerificationSubmission;
 use App\Services\ReportMetrics\ProcedureMetric;
 use App\Services\ReportMetrics\ReportMetric;
 use App\Services\ReportMetrics\VulnerabilityMetric;
-use App\Services\VerificationEvaluators\VerificationEvaluator;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -40,13 +36,14 @@ class VerificationsController extends Controller
         // get a relevant tip if one exists
         $tip = Tip::getNext(Auth::id(), 'verify');
 
-        // get all user's verification assignments
+        // get user's verification assignments
         $assignments = VerificationAssignment::where('assignee_id', Auth::id())
             ->where('status', '!=', 'cancelled')
             ->with(['verificationBatch:id,report_id', 'verificationBatch.report:id,title,procedure'])
             ->orderByDesc('created_at')
             ->get();
 
+        // select the correct assignment to view if specified in GET paramter
         if(request()->get('assignment')) {
             $selectedAssignment = (int)(request()->validate([
                 'assignment' => 'integer'
@@ -82,7 +79,6 @@ class VerificationsController extends Controller
 
     public function store()
     {
-        // validate form data
         $validatedData = request()->validate([
             'assignmentId' => 'required|integer|min:0',
             'verifiable' => 'required|boolean',
@@ -136,10 +132,9 @@ class VerificationsController extends Controller
         if (isset($assignment)) {
             $assignment->status = 'cancelled';
             $assignment->save();
+            // assign new verifier
             AddVerifer::dispatch($assignment->verificationBatch);
         }
-
-        // assign new verifier
 
         return Redirect::route('dashboard');
     }

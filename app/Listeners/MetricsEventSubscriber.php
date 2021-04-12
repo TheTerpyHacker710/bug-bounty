@@ -24,6 +24,8 @@ class MetricsEventSubscriber
 
     public function handle($event) {
         $eventClass = get_class($event);
+//        print("HELLO\n");
+//        print($eventClass . "\n");
         $metrics = $this->metricEventsMap[$eventClass];
         foreach ($metrics as $metricClass) {
             $metric = $this->metrics[$metricClass];

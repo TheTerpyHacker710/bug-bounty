@@ -33,9 +33,6 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-//        HitRateEventSubscriber::class,
-//        ActivityScoreEventSubscriber::class,
-//        CompetenceEventSubscriber::class,
         MetricsEventSubscriber::class,
         TipsEventSubscriber::class,
     ];
