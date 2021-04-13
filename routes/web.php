@@ -89,6 +89,9 @@ Route::middleware('can:accessVendor')->group(function(){
 
     Route::middleware(['auth:sanctum', 'verified'])->post(
     '/program-delete', [VendorController::class, 'programDelete']);
+    
+    Route::middleware(['auth:sanctum', 'verified'])->post(
+    '/program-update', [VendorController::class, 'programUpdate']);
 
     Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
@@ -104,6 +107,10 @@ Route::middleware('can:accessAdmin')->group(function(){
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('adminDashboard');
+    
+    Route::get('/admin/dashboard', [VendorController::class, 'vendorRequests'])
+    ->name('adminDashboard')
+    ->middleware('auth');
 
     Route::get('/admin/reports', [ActiveReportsController::class, 'index'])
         ->name('Reports')

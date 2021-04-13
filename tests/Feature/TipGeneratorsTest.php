@@ -36,14 +36,14 @@ class TipGeneratorsTest extends CoreTest
         }
     }
 
-    public function test_tips_are_updated_when_report_submitted()
+    public function test_tips_are_generated_when_report_submitted()
     {
         $tips = $this->get_relevant_tips(ReportSubmitted::class);
         $this->submit_report();
         $this->check_tips_updated($tips);
     }
 
-    public function test_metrics_are_updated_when_verification_submitted()
+    public function test_tips_are_generated_when_verification_submitted()
     {
         User::factory()->count(20)->create();
         $userMetrics = $this->get_relevant_tips(VerificationSubmitted::class);
@@ -54,7 +54,7 @@ class TipGeneratorsTest extends CoreTest
         $this->check_tips_updated($userMetrics);
     }
 
-    public function test_metrics_are_updated_when_verification_batch_is_completed()
+    public function test_tips_are_generated_when_verification_batch_is_completed()
     {
         $userMetrics = $this->get_relevant_tips(VerificationBatchCompleted::class);
         $this->verify_report();

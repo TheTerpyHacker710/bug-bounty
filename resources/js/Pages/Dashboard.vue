@@ -1,9 +1,14 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                User Dashboard
-            </h2>
+                <div class = "flex justify-between">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                        User Dashboard
+                    </h2>
+                    <h2 class="font-semibold text-gray-800 leading-tight">
+                        <b>Reputation: </b> {{userInfo.reputation}}
+                    </h2>
+                </div>
         </template>
 
         <div class="py-6 px-6">

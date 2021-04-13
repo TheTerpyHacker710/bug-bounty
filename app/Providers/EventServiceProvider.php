@@ -7,6 +7,9 @@ use App\Listeners\CompetenceEventSubscriber;
 use App\Listeners\HitRateEventSubscriber;
 use App\Listeners\MetricsEventSubscriber;
 use App\Listeners\TipsEventSubscriber;
+use App\Listeners\GiveReporterPointsListener;
+use App\Listeners\GiveVerifierPointsListener;
+use App\Events\VerificationBatchCompleted;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,9 +26,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-         VerificationBatchCompleted::class => [
-            GiveReporterPoints::class,
-            GiveVerifierPoints::class,
+        VerificationBatchCompleted::class => [
+            GiveReporterPointsListener::class,
+            GiveVerifierPointsListener::class,
         ],
     ];
 

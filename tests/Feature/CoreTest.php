@@ -15,6 +15,9 @@ abstract class CoreTest extends TestCase
 {
     protected function create_programs()
     {
+        User::factory()->make([
+            'isVendor' => true,
+        ])->save();
         Program::factory()->count(5)->create();
         $this->assertDatabaseCount('programs', 5);
     }
