@@ -1,3 +1,4 @@
+<!--Layout for admin user only-->
 <template>
     <div>
         <jet-banner />
@@ -9,7 +10,7 @@
                     <div class="flex justify-between h-16">
                         <div class="flex">
 
-                            <!-- Navigation Links -->
+                            <!-- Admin Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('adminDashboard')" :active="route().current('adminDashboard')">
                                     Dashboard

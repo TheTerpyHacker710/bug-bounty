@@ -3,6 +3,7 @@
         <h2>Active Jobs</h2>
     </div>
 
+<!--    Vue component to read in reports and verifications-->
     <div class="grid grid-cols-2 gap-4 px-1 py-1 h-auto">
         <span class="px-4 py-4 border-4 ">
                 <h2 class="text-center py-2">Reports to Verify</h2>
@@ -30,7 +31,6 @@
                 </ul>
         </span>
     </div>
-
 </template>
 
 <script>

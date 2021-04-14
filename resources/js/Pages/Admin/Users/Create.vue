@@ -8,6 +8,7 @@
             </h2>
         </template>
 
+        <!--        Values and input fields to create users-->
         <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -48,6 +49,7 @@
                                    placeholder="org_name" v-model="form.org_name">
                             <div v-if="errors.org_name">{{ errors.org_name }}</div>
                         </div>
+<!--                        Confirm create user button-->
                         <jet-button type="submit" class="btn btn-primary">Create User</jet-button>
                     </form>
                 </div>
@@ -71,6 +73,7 @@ export default {
         JetButton,
         JetLabel,
     },
+    // Set variables to blank
     data() {
         return {
             form: {
@@ -83,6 +86,7 @@ export default {
             }
         }
         },
+    // Create user method
             methods: {
             createUser() {
                 this.$inertia.post('/admin/users', this.form)

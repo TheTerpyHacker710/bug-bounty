@@ -8,6 +8,7 @@
             </h2>
         </template>
 
+<!--        Read in all active reports and verifications for admin user to view-->
         <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <span class="bg-white col-span-4 shadow-xl">
