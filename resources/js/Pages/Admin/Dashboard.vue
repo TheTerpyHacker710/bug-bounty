@@ -7,6 +7,7 @@
             </h2>
         </template>
 
+<!--        Table to view all vendor requests-->
         <div class="grid grid-cols-1 gap-4 px-1 py-1 h-auto text-center py-2">
             <h2>Vendor Appeals</h2>
         </div>
@@ -30,6 +31,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ data.user_id }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ data.approved }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ data.created_at }}</td>
+<!--                                        Button to approve vendor request-->
                                         <td class="px-6 py-4 whitespace-nowrap"><jet-button @click="approve(data.user_id)">Approve</jet-button></td>
                                     </tr>
                                 </tbody>
@@ -59,6 +61,7 @@
             JetButton
         },
 
+        // Set variable to empty
         data() {
             return {
                 form: this.$inertia.form({
@@ -69,7 +72,7 @@
         },
 
         methods: {
-
+            // Method that calls approve function
             approve(user_id) {
 
                 this.form.user_id = user_id;

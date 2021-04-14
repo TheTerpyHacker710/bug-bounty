@@ -8,6 +8,7 @@
             </h2>
         </template>
 
+<!--        Values and input fields to edit users details-->
         <div class="py-3">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -42,10 +43,10 @@
                             <input type="text" class="form-control" id="org_name" placeholder="org_name" v-model="form.org_name">
                             <div v-if="errors.org_name">{{ errors.org_name }}</div>
                         </div>
-
+                        <!--Confirm changes-->
                         <jet-button type="submit" class="btn btn-primary">Update User</jet-button>
                      </form>
-
+<!--                Delete user button    -->
                 <jet-button class="btn btn-danger" @click="deleteUser()">Delete User</jet-button>
                 </div>
             </div>
@@ -69,6 +70,7 @@ export default {
         JetLabel,
     },
 
+    // Read in data
     data() {
         return {
             loading: false,
@@ -82,6 +84,7 @@ export default {
         }
     },
 
+    // Delete user function with confirmation
     methods: {
         deleteUser() {
             if (confirm('Are you sure you want to delete this user?')) {
@@ -92,6 +95,7 @@ export default {
             }
         },
 
+        // Update user function
         updateUser() {
             this.loading = true;
             this.$inertia.patch(`/admin/users/${this.user.id}`, this.form)
