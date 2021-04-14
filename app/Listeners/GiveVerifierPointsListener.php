@@ -5,23 +5,20 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Events\VerificationBatchCompleted;
-use App\Model\User;
+use App\Models\User;
 
 class GiveVerifierPointsListener
 {
 
-
     /**
      * Handle the event.
      *
-     * @param  VerficationBatchCompleted  $event
+     * @param  VerificationBatchCompleted  $event
      * @return void
      */
-    public function handle(VerficationBatchCompleted $event)
+    public function handle(VerificationBatchCompleted $event)
     {
-        foreach ($event->VerificationBatch->VerficationAssignment->assignee_id as $user_id)
-        {
-            $user_id->addPoint($point = 100);
-        }
+        $event->verificationBatch->verificationAssignments->each(fn($a) => $a->assignee->addPoint($points = 1000));
     }
+   
 }
