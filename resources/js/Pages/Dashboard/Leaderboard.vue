@@ -1,5 +1,5 @@
 <template>
-    <h2 class="text-center text-lg">Leaderboard (Top 10)</h2>
+    <h2 class="text-center text-lg text-gray-600">Leaderboard (Top 10)</h2>
         <div class="grid grid-cols-6 px-2 py-2">
                 
             <span class="col-span-1">

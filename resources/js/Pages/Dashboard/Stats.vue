@@ -1,6 +1,6 @@
 <template>
     <div class="text-center px-4 py-4">
-        <h1 class="text-xl md:text-2xl">Statistics</h1>
+        <h1 class="text-xl md:text-2xl text-gray-700">Statistics</h1>
     </div>
 
     <div class="grid grid-rows-2 gap-4 px-4 py-2">
