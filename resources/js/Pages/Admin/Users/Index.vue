@@ -8,12 +8,14 @@
             </h2>
         </template>
 
+<!--        Create user button-->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="my-5">
                 <jet-button><a href="/admin/users/create" class="btn btn-primary">Create User</a></jet-button>
             </div>
         </div>
 
+<!--        Table to display columns and rows of users and users details-->
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -41,6 +43,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">{{ user.org_name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ user.isVendor }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900">
+<!--                                        Edit link to edit user (included in table)-->
                                     <inertia-link :href="`/admin/users/${user.id}/edit`">Edit</inertia-link>
                                     </td>
                                 </tr>
