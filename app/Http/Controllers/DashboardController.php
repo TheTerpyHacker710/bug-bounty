@@ -13,6 +13,7 @@ use App\Models\VerificationAssignment;
 use App\Models\VerificationSubmission;
 use Inertia\Inertia;
 Use Auth;
+use DB;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
 
