@@ -3,8 +3,8 @@
         <h2 class="text-xl md:text-2xl text-gray-700">Active Jobs</h2>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 px-1 py-1 h-auto">
-        <span class="px-4 py-4 border-4 rounded-lg h-full ">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-1 py-1">
+        <span class="px-4 py-4 border-4 rounded-lg">
                 <h2 class="text-center py-2 text-lg text-gray-600">Reports to Verify</h2>
                 <ul v-if="activeVerifications.length > 0">
                     <div v-for="verification in activeVerifications" :key="verification.id" class="py-2">
