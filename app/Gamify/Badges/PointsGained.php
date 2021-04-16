@@ -4,14 +4,14 @@ namespace App\Gamify\Badges;
 
 use QCod\Gamify\BadgeType;
 
-class FirstReport extends BadgeType
+class PointsGained extends BadgeType
 {
     /**
      * Description for badge
      *
      * @var string
      */
-    protected $description = 'First report submitted';
+    protected $description = 'First points recieved';
     
     protected $level = 1;
 
@@ -25,6 +25,6 @@ class FirstReport extends BadgeType
      */
     public function qualifier($user)
     {
-        return $user->getPoints() >= 1000;
+        return $user->getPoints() >= 100;
     }
 }
