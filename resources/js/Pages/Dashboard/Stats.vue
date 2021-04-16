@@ -4,7 +4,7 @@
             <h1 class="text-xl md:text-2xl text-gray-700">Statistics</h1>
         </div>
 
-        <div class="grid grid-rows-2 gap-4 px-1 py-2 h-full">
+        <div class="grid grid-rows-2 gap-4 px-1 py-1 h-full">
             
             <span class="px-4 py-4 border-4 rounded-lg">
                 <leaderboard :leaderboard="leaderboard"/>
