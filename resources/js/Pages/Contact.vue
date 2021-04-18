@@ -9,11 +9,11 @@
 
             <div class="container flex flex-col justify-center mx-auto h-auto w-4/5 mt-5 pb-8 bg-white rounded-lg">
                 <div class="flex justify-start">
-                    <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                    <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 border rounded shadow-sm hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                         <p> &lt;- Home</p>
                     </inertia-link>
                 </div>
-                <div class="border rounded py-2 my-2 flex">
+                <div class="border rounded shadow-md py-2 my-2 flex">
                     <div class="flex flex-col w-3/5 justify-start">
                         <form @submit.prevent="form.post('/contact/sendmail', {preserveScroll: true, onSuccess: () => form.reset(),})" novalidate="true">
                             <div class="flex flex-col">
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end px-4">
-                                <button type="submit" :disabled="form.processing" class="no-underline text-center text-sm px-4 py-2 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
+                                <button type="submit" :disabled="form.processing" class="no-underline text-center text-sm px-4 py-2 border rounded shadow-sm hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
                                     Submit
                                 </button>
                             </div>
