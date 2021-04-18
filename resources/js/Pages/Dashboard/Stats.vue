@@ -13,7 +13,7 @@
             <span class="px-2 py-2 border-4 rounded-lg">            
                 <chart :chart="chart"/>
             </span>
-        </div>   
+        </div>
     </div>
 </template>
 
