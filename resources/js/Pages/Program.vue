@@ -9,18 +9,18 @@
 
             <div class="container mx-auto h-auto w-4/5 mt-5 pb-8 bg-white rounded-lg">
                 <div class="flex justify-start">
-                    <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                    <inertia-link :href="route('home')" class="no-underline text-center text-sm px-4 py-2 border rounded shadow-sm hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                         <p>&lt;- Home</p>
                     </inertia-link>
                 </div>
-                <div class="border rounded py-2 my-2">
+                <div class="border rounded shadow-md py-2 my-2">
                     <p class="text-center p-4">{{program.Description}}</p>
                 </div>
                 <div class="px-1 py-4 flex flex-col md:flex-row md:items-center md:justify-center">
-                    <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id, origin: 'ViewProgram' }" class="no-underline text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
+                    <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id, origin: 'ViewProgram' }" class="no-underline text-sm px-4 py-2 my-1 border rounded shadow-sm hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
                         Join
                     </inertia-link>
-                    <inertia-link :href="route('ContactVendor')" class="no-underline text-center text-sm px-4 py-2 my-1 ml-4 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                    <inertia-link :href="route('ContactVendor')" class="no-underline text-center text-sm px-4 py-2 my-1 ml-4 border rounded shadow-sm hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                         Contact
                     </inertia-link>
                 </div>
