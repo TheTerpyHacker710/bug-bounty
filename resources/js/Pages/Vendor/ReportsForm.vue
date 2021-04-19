@@ -24,7 +24,8 @@
                                     <tr>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report Title</th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Submitted</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Approved for Verification</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verified Status</th>
                                         <th scope="col" class="relative px-6 py-3">Actions</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,11 @@
                                     <tr v-for="report in reports" :key="report.id">
                                         <td class="px-6 py-4 whitespace-nowrap">{{ report.title }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ report.created_at }}</td>
+                                        <td v-if="report.requiresApproval == 1 && report.vendorApproved == 0" class="px-6 py-4 whitespace-nowrap">
+                                            <button @click="approveToVerify(report)" class="focus:outline-none text-white text-sm py-1 px-2.5 rounded-md bg-gray-700 hover:bg-gray-900 hover:shadow-lg">Approve</button>
+                                        </td>
+                                        <td v-if="report.requiresApproval == 1 && report.vendorApproved == 1" class="px-6 py-4 whitespace-nowrap">Approved</td>
+                                        <td v-if="report.requiresApproval == 0" class="px-6 py-4 whitespace-nowrap">N/A</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ report.status }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-indigo-600 hover:text-indigo-900">
                                             <button @click="showModal(report)" class="focus:outline-none text-white text-sm py-1 px-2.5 rounded-md bg-gray-700 hover:bg-gray-900 hover:shadow-lg">View Report</button>
@@ -57,7 +63,7 @@
                         </template>
 
                         <template #footer>
-                            <button @click.native="closeModal" class="inline-block ml-2 mt-10 mb-2 w-auto p-1 border-2 rounded border-red-600 bg-red-600 text-white hover:bg-red-700" >
+                            <button @click.native="closeModal" class="inline-block ml-2 mt-10 mb-2 w-auto p-1 border-2 rounded border-red-600 bg-red-600 text-white hover:bg-red-700">
                                 close
                             </button>
                         </template>
@@ -91,6 +97,9 @@
             return {
                 reportShowModal: false,
                 currentReport: Object,
+                approveReportForm: this.$inertia.form({
+                    id: '',
+                }),
             }
         },
 
@@ -116,6 +125,12 @@
                 this.currentReport = report;
                 this.reportShowModal = true;
             },
+
+            approveToVerify(report) {
+                this.approveReportForm.id = report.id;
+                this.approveReportForm.post('report-approve');
+
+            }
 
         }
 
