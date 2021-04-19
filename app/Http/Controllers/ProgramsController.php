@@ -77,16 +77,17 @@ class ProgramsController extends Controller
         $request->validate([
            'Title' => 'required',
            'Description' => 'required',
+           'vendorApprove' => 'required',
         ]);
 
         
-        Program::create([
+        Program::firstOrCreate([
            'Title' => $request->Title,
            'Description' => $request->Description,
            'Excerpt' => 'test',
            'vendorID' => Auth::user()->id,
            'Exclusive' => 0,
-           'Vendor Approval' => 0,
+           'vendorApproval' => $request->vendorApprove,
         ]);
 
         return redirect()->route('Vendor');
