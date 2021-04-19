@@ -18,6 +18,20 @@
                         <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.Title" required />
                     </div>
 
+                    <div class="mt-10 w-1/2">
+                        <jet-label>Do you want to manually approve reports before they can be verified?<span class="text-red-600"> *</span></jet-label>
+                        <div class="mt-2">
+                            <label class="inline-flex items-center">
+                                <jet-input id="vendorApproveTrue" value="1" name="vendorApprove" type="radio" v-model="form.vendorApprove"></jet-input>
+                                <span class="ml-2">Yes</span>
+                            </label>
+                            <label class="inline-flex items-center ml-6">
+                                <jet-input id="vendorApproveFalse" value="0" name="vendorApprove" type="radio" v-model="form.vendorApprove"></jet-input>
+                                <span class="ml-2">No</span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="mt-8 w-1/2">
                         <jet-label for="description">Description<span class="text-red-600"> *</span></jet-label>
                         <textarea class="w-full h-48" v-model="form.Description" placeholder="Please describe the program including the desired scope..." />
@@ -54,6 +68,7 @@
                 form: this.$inertia.form({
                     Title: '',
                     Description: '',
+                    vendorApprove: '',
 
                 }),
             }
