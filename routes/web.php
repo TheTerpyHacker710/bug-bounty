@@ -93,6 +93,8 @@ Route::middleware('can:accessVendor')->group(function(){
     Route::middleware(['auth:sanctum', 'verified'])->post(
     '/program-update', [VendorController::class, 'programUpdate']);
 
+    Route::post('/approveReport', [VendorController::class, 'reportApprove'])->name('report-approve');
+
     Route::post('/vendor-program', ['App\Http\Controllers\ProgramsController', 'vendorProgramStore']);
 
 });

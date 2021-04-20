@@ -128,7 +128,7 @@
 
             approveToVerify(report) {
                 this.approveReportForm.id = report.id;
-                this.approveReportForm.post('report-approve');
+                this.approveReportForm.post(route('report-approve'));
 
             }
 

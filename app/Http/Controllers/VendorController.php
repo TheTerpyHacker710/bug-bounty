@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AssignVerifiers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use Auth;
@@ -40,10 +41,15 @@ class VendorController extends Controller
    public function reportApprove(request $request){
 
        $request->validate([
-               'id' => 'required',
+               'id' => 'required|exists:reports',
             ]);
 
-        Report::where('id', $request->id)->update(['vendorApproved' => 1]);
+        $report = Report::find($request->id);
+
+        $report->update(['vendorApproved' => 1]);
+
+        AssignVerifiers::dispatch($report);
+
         return Redirect::route('Vendor');
 
    }
@@ -89,6 +95,7 @@ class VendorController extends Controller
 
         $reports = array_reverse($vendorReports);
 
+       //return print_r($vendorReports);
         
         return Inertia::render('Vendor', [
                 'programs' =>  $vendorPrograms,
