@@ -20,7 +20,7 @@ class CreateProgramsTable extends Migration
             $table->string('Excerpt');
             $table->foreignId('VendorID')->references('id')->on('users');
             $table->boolean('Exclusive');
-            $table->boolean('Vendor Approval');
+            $table->boolean('vendorApproval');
             $table->timestamps();
         });
     }
