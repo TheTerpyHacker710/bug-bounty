@@ -20,6 +20,7 @@ class CreateReportsTable extends Migration
             $table->json('procedure');
             $table->json('metrics');
             $table->foreignId('creator_id')->constrained('users');
+            $table->boolean('vendorApproved');
             $table->enum('status', array('pending', 'verified', 'rejected'))->default('pending');
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();

@@ -28,7 +28,7 @@ class ProgramFactory extends Factory
             'Excerpt' => 'A program',
             'VendorID' => User::all()->where('isVendor',  '1')->random()->id,
             'Exclusive' => false,
-            'Vendor Approval' => false,
+            'vendorApproval' => false,
         ];
     }
 }

@@ -9,7 +9,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['program_id', 'procedure', 'metrics', 'creator_id', 'title'];
+    protected $fillable = ['program_id', 'procedure', 'metrics', 'creator_id', 'title', 'vendorApproved'];
 
     public function creator() {
         return $this->belongsTo(User::class, 'creator_id');
