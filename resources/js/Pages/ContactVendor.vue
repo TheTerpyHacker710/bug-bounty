@@ -95,7 +95,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
         },
 
         methods: {
-
+            
         },
     }
 </script>

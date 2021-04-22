@@ -7,7 +7,7 @@
             </div>
 
             <div class="container mx-auto h-auto w-4/5 mt-5 pb-8 bg-white rounded-lg">
-                <div :key="program.id" v-for="program in programs" class="border rounded py-2 my-2">
+                <div :key="program.id" v-for="program in programs" class="border rounded py-2 my-2 shadow-md">
                     <div class="flex flex-col justify-center md:flex-row md:justify-between">
                         <div class="flex flex-col md:flex-row md:justify-between">
                             <h4 class="text-lg px-4 py-2 text-center">{{program.Title}}</h4>
@@ -15,14 +15,14 @@
                         </div>
 
                         <div class="px-1 flex flex-col md:flex-row md:items-center">
-                            <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id }" class="no-underline text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
+                            <inertia-link v-if="$page.props.user && activeReportPresent(program.id)" :href="route('JoinProgram')" method="post" :data="{user_id: $page.props.user.id, program_id: program.id }" class="no-underline text-center text-sm px-4 py-2 my-1 border rounded shadow-sm hover:border-transparent text-white bg-green-400 hover:bg-green-300 sm:mt-0">
                                 Join
                             </inertia-link>
-                            <inertia-link :href="'/program/' + program.id" class="no-underline text-center text-sm px-4 py-2 my-1 lg:mr-2 lg:ml-2 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                            <inertia-link :href="'/program/' + program.id" class="no-underline text-center text-sm px-4 py-2 my-1 lg:mr-2 lg:ml-2 border rounded shadow-sm hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                                 View
                             </inertia-link>
 
-                            <inertia-link :href="route('ContactVendor')" class="no-underline text-center text-sm px-4 py-2 my-1 border rounded hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
+                            <inertia-link :href="route('ContactVendor')" class="no-underline text-center text-sm px-4 py-2 my-1 border rounded shadow-sm hover:border-transparent text-white bg-blue-400 hover:bg-blue-300 sm:mt-0">
                                 Contact
                             </inertia-link>
                         </div>

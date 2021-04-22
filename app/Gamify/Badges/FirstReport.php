@@ -11,7 +11,11 @@ class FirstReport extends BadgeType
      *
      * @var string
      */
-    protected $description = '';
+    protected $description = 'First report submitted';
+    
+    protected $level = 1;
+
+    protected $icon = 'storage/badges/first-report.svg';
 
     /**
      * Check is user qualifies for badge

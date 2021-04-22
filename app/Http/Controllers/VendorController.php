@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AssignVerifiers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use Auth;
 use Inertia\Inertia;
 use App\Models\VendorRequest;
 use App\Models\User;
+use App\Models\Report;
 use Redirect;
 
 class VendorController extends Controller
 {
 
-   public function vendorRequests(request $request) {
-       
+   public function vendorRequests() {
+
         $data = VendorRequest::all();
 
        return Inertia::render('Admin/Dashboard', [
            'vendor_requests' => $data,
        ]);
+
    }
-    
+
    public function vendorApprove(request $request){
 
         $request->validate([
@@ -35,6 +38,21 @@ class VendorController extends Controller
 
    }
 
+   public function reportApprove(request $request){
+
+       $request->validate([
+               'id' => 'required|exists:reports',
+            ]);
+
+        $report = Report::find($request->id);
+
+        $report->update(['vendorApproved' => 1]);
+
+        AssignVerifiers::dispatch($report);
+
+        return Redirect::route('Vendor');
+
+   }
 
    public function vendorApply(){
         
@@ -55,6 +73,7 @@ class VendorController extends Controller
 
    public static function vendorDashboard(){
 
+     
         $vendorPrograms = Program::where('vendorID', Auth::user()->id)->get();
         $vendorReports = array();
 
@@ -62,13 +81,21 @@ class VendorController extends Controller
         foreach($vendorPrograms as $program){
 
             $programReports = $program->reports()->get();
+            $requiresVendorApproval = 0;
+
+            if($program->vendorApproval == 1){
+                $requiresVendorApproval = 1;
+            }            
 
             foreach($programReports as $programReport){
+                $programReport->setAttribute('requiresApproval', $requiresVendorApproval);
                 array_push($vendorReports, $programReport);
             }        
         }
 
         $reports = array_reverse($vendorReports);
+
+       //return print_r($vendorReports);
         
         return Inertia::render('Vendor', [
                 'programs' =>  $vendorPrograms,
@@ -90,21 +117,21 @@ class VendorController extends Controller
 
         return redirect()->route('Vendor');
     }
-    
+
     public function programUpdate(Request $request){
 
          $request->validate([
             'id' => 'required',
            'title' => 'required',
+           'vendorApprove' => 'required',
            'descr' => 'required',
         ]);
 
-        Program::where('id', $request->id)->update(['Title' => $request->title, 'Description' => $request->descr]);
+        Program::where('id', $request->id)->update(['Title' => $request->title, 'Description' => $request->descr, 'vendorApproval' => $request->vendorApprove]);
 
         return Redirect::route('Vendor');
 
     }
-
 
 
 }

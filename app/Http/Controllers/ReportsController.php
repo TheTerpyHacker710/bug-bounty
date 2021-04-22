@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ReportSubmitted;
 use App\Jobs\AssignVerifiers;
 use App\Models\Program;
+use App\Models\activeReports;
 use App\Models\Tip;
 use App\Services\ReportMetrics\ReportMetric;
 use App\Services\ReportMetrics\VulnerabilityMetric;
@@ -38,7 +39,7 @@ class ReportsController extends Controller
     {
         // validate form data
         $validatedData = request()->validate([
-            'program_id' => 'required|integer',
+            'program_id' => 'required|integer|exists:programs,id',
             'procedure' => 'required|array|min:1|max:25',
             'procedure.*' => 'required|string|max:1000',
             'metrics' => 'required|array|min:1|max:25',
@@ -51,14 +52,24 @@ class ReportsController extends Controller
         $validatedData['metrics'] = json_encode($validatedData['metrics']);
         $validatedData['creator_id'] = Auth::id();
 
+        // get program
+        $program = Program::find($validatedData['program_id']);
+
+        // set vendor approval
+        $validatedData['vendorApproved'] = !$program->vendorApproval;
+
         // create report
         $report = Report::create($validatedData);
 
         // dispatch report creation event
         ReportSubmitted::dispatch($report);
 
-        // dispatch verification assignment job
-        AssignVerifiers::dispatch($report);
+        // dispatch verification assignment job if vendor approval is not required
+        if (!$program->vendorApproval) {
+            AssignVerifiers::dispatch($report);
+        }
+
+        activeReports::where('program_id', $validatedData['program_id'])->where('user_id', Auth::id())->delete();
 
         return Redirect::route('dashboard');
     }
