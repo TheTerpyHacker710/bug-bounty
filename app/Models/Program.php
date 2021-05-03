@@ -9,7 +9,7 @@ class Program extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'Title', 'Description', 'Excerpt', 'vendorID', 'Exclusive', 'Vendor Approval'];
+    protected $fillable = ['id', 'Title', 'Description', 'Excerpt', 'vendorID', 'Exclusive', 'vendorApproval'];
 
     public function activeReports() {
         return $this->hasMany(activeReports::class);
